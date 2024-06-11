@@ -1,0 +1,12 @@
+.bg-blue {
+    background: linear-gradient(to right, #0ea5e9, #0284c7); 
+  }
+  
+  .skew-box {
+    transform: skewY(-6deg);
+  }
+  
+  .unskew-box {
+    transform: skewY(0) rotate(-6deg);
+  }
+  

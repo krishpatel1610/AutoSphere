@@ -1,7 +1,7 @@
 import { Button, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOrders } from "../../API";
+import { getBrandsWithCarCounts } from "../../API"; // Import the getBrandsWithCarCounts function
 import AppFooter from "../../Components/AppFooter";
 import AppHeader from "../../Components/AppHeader";
 import SideMenu from "../../Components/SideMenu";
@@ -13,9 +13,13 @@ function Brand() {
 
   useEffect(() => {
     setLoading(true);
-    getOrders().then((res) => {
-      setDataSource(res.products);
+    getBrandsWithCarCounts().then((brands) => { // Fetch brands with car counts using getBrandsWithCarCounts function
+      setDataSource(brands); // Set brands data
       setLoading(false);
+    }).catch(error => {
+      console.error('Error loading brand data:', error);
+      setLoading(false);
+      // Handle error appropriately, such as setting an error state or displaying a message to the user
     });
   }, []);
 
@@ -45,26 +49,17 @@ function Brand() {
               loading={loading}
               columns={[
                 {
-                  title: "Title",
-                  dataIndex: "title",
+                  title: "Brand Image",
+                  dataIndex: "image",
+                  render: (image) => <img src={image} alt="Brand" style={{ width: '50px', borderRadius: '50%' }} />
                 },
                 {
-                  title: "Price",
-                  dataIndex: "price",
-                  render: (value) => <span>${value}</span>,
+                  title: "Brand Name", // Assuming the brand name is stored under 'name' in the data
+                  dataIndex: "name",
                 },
                 {
-                  title: "Discounted Price",
-                  dataIndex: "discountedPrice",
-                  render: (value) => <span>${value}</span>,
-                },
-                {
-                  title: "Quantity",
-                  dataIndex: "quantity",
-                },
-                {
-                  title: "Total",
-                  dataIndex: "total",
+                  title: "Number of Cars", // Display the number of cars for each brand
+                  dataIndex: "cars",
                 },
               ]}
               dataSource={dataSource}

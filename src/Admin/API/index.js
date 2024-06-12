@@ -16,3 +16,39 @@ export const getCustomers = () => {
 export const getComments = () => {
   return fetch("https://dummyjson.com/comments").then((res) => res.json());
 };
+
+export const getBrands = () => {
+  return fetch("http://localhost:5000/api/brands").then((res) => res.json());
+};
+
+export const getBrandsWithCarCounts = async () => {
+  try {
+    const brandsResponse = await fetch("http://localhost:5000/api/brands");
+    if (!brandsResponse.ok) {
+      throw new Error(`HTTP error! Status: ${brandsResponse.status}`);
+    }
+    const brandsData = await brandsResponse.json();
+
+    // Iterate through each brand to fetch the car count
+    const brandsWithCarCount = await Promise.all(brandsData.map(async (brand) => {
+      const carCountResponse = await fetch(`http://localhost:5000/api/vehicles/brands/${brand._id}/cars`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!carCountResponse.ok) {
+        throw new Error(`HTTP error! Status: ${carCountResponse.status}`);
+      }
+
+      const carCountData = await carCountResponse.json();
+      return { ...brand, cars: carCountData.vehicleCount };
+    }));
+
+    return brandsWithCarCount;
+  } catch (error) {
+    console.error('Error loading brand data:', error);
+    throw error; // Re-throw the error to handle it in the component
+  }
+};

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable react/jsx-no-comment-textnodes */
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -22,14 +24,21 @@ const vehicleTypes = [
   { value: "D", label: "Diesel" },
   { value: "C", label: "CNG" },
   { value: "E", label: "Electric" },
-  { value: "ED", label: "Electric + Diesel" },
-  { value: "EP", label: "Electric + Petrol" },
 ];
 
 const transmissions = [
   { value: "A", label: "Automatic" },
   { value: "M", label: "Manual" },
   { value: "I", label: "Intelligent Manual Transmission (IMT)" },
+];
+
+const categories = [
+  { value: "Sedan", label: "Sedan" },
+  { value: "SUV", label: "SUV" },
+  { value: "Hatchback", label: "Hatchback" },
+  { value: "Compact Sedan", label: "Compact Sedan" },
+  { value: "Compact SUV", label: "Compact SUV" },
+  { value: "Convertible", label: "Convertible" },
 ];
 
 const cities = ["Ahmedabad", "Mumbai", "Delhi"]; // List of cities
@@ -42,10 +51,21 @@ const AddVehicles = () => {
   const [transmission, setTransmission] = useState("");
   const [engineSize, setEngineSize] = useState("");
   const [overview, setOverview] = useState("");
+  const [category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [brands, setBrands] = useState([]);
   const [variants, setVariants] = useState([
     { name: "", engineSize: "", transmissionType: "", price: "" },
   ]);
   const [cityPrices, setCityPrices] = useState([{ city: "", price: "" }]);
+
+  useEffect(() => {
+    // Fetch brands from backend API
+    fetch("http://localhost:5000/api/brands")
+      .then((response) => response.json())
+      .then((data) => setBrands(data))
+      .catch((error) => console.error("Error fetching brands:", error));
+  }, []);
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
@@ -122,7 +142,7 @@ const AddVehicles = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const vehicleData = {
+    const schema = {
       name,
       images,
       imageUrl,
@@ -130,11 +150,13 @@ const AddVehicles = () => {
       transmission,
       engineSize,
       overview,
+      category,
+      brand,
       variants,
       cityPrices,
     };
-    console.log(vehicleData);
-    // You can now send `vehicleData` to your backend API
+    console.log(schema);
+    // You can now send `schema` to your backend API
   };
 
   return (
@@ -156,6 +178,42 @@ const AddVehicles = () => {
               Add Vehicle
             </Typography>
             <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+              <Grid item xs={6}>
+              <TextField
+                    label="Brand"
+                    select
+                    value={brand}
+                    onChange={(e) => setBrand(e.target.value)}
+                    fullWidth
+                    required
+                  >
+                    {brands.map((brand) => (
+                      <MenuItem key={brand._id} value={brand._id}>
+                        {brand.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item xs={6} style={{ marginBottom: '16px' }}>
+                  <TextField
+                    label="Category"
+                    select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    fullWidth
+                    required
+                  >
+                    {categories.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+                
+              </Grid>
+
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField

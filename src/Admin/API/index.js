@@ -43,6 +43,13 @@ export const createBrands = async (brandData) => {
   }
 };
 
+export const getVehicles = () => {
+  return fetch("http://localhost:5000/api/vehicles").then((res) => res.json());
+};
+
+export const getCategories = () => {
+  return fetch("http://localhost:5000/api/categories").then((res) => res.json());
+};
 
 
 export const getBrands = () => {

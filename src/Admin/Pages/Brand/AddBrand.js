@@ -6,12 +6,14 @@ import AppFooter from "../../Components/AppFooter";
 import SideMenu from "../../Components/SideMenu";
 import AppHeader from "../../Components/AppHeader";
 import { createBrands } from "../../API"; // Import the createBrands function from your API file
+import { useNavigate } from "react-router-dom";
 
 function AddBrand() {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null); // State to store error message
+  let navigate = useNavigate();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -36,6 +38,8 @@ function AddBrand() {
     try {
       await createBrands(formData); // Pass formData to createBrands function
       console.log("Brand added successfully!");
+      alert("Brand added successfully!");
+      navigate('/Admin/brand');
       // Redirect to the brand page or perform any other action upon successful brand creation
     } catch (error) {
       console.error("Error adding brand:", error);

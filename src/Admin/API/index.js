@@ -17,6 +17,34 @@ export const getComments = () => {
   return fetch("https://dummyjson.com/comments").then((res) => res.json());
 };
 
+export const createBrands = async (brandData) => {
+  try {
+    // Convert brandData to a string
+    const formDataString = JSON.stringify(brandData);
+    // console.log(formDataString)
+
+    const response = await fetch("http://localhost:5000/api/brands", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: formDataString,
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error creating brand:", error);
+    throw error;
+  }
+};
+
+
+
 export const getBrands = () => {
   return fetch("http://localhost:5000/api/brands").then((res) => res.json());
 };

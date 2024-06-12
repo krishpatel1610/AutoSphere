@@ -30,16 +30,17 @@ function Brand() {
       <div className="SideMenuAndPageContent">
         <SideMenu />
         <div style={{ margin: "auto" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Typography.Title level={4} style={{ marginRight: 20 }}>
-              Orders
-            </Typography.Title>
-            {/* Call the function on click */}
-            <Button type="primary" onClick={handleAddBrandClick}>
-              Add Brand
-            </Button>
-          </div>
           <Space size={20} direction="vertical">
+            <Space size={20} direction="horizontal" style={{ alignItems: 'center' }}>
+              <Typography.Title level={4} style={{ margin: 0 }}>Brand</Typography.Title>
+              {/* Add spacing to push button to the right */}
+              <span style={{ marginLeft: '600px' }}>
+                {/* Call the function on click */}
+                <Button type="primary" onClick={handleAddBrandClick}>
+                  Add Brand
+                </Button>
+              </span>
+            </Space>
             <Table
               loading={loading}
               columns={[

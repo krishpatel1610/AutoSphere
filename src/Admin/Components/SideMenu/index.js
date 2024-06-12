@@ -1,8 +1,8 @@
 import {
   AppstoreOutlined,
-  ShopOutlined,
-  ShoppingCartOutlined,
+  ToolOutlined,
   UserOutlined,
+  CarOutlined, 
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
@@ -37,12 +37,12 @@ function SideMenu() {
           {
             label: "Brands",
             key: "/Admin/brand",
-            icon: <ShoppingCartOutlined />,
+            icon: <ToolOutlined />,
           },
           {
-            label: "Inventory",
-            key: "/Admin/inventory",
-            icon: <ShopOutlined />,
+            label: "Vehicles",
+            key: "/Admin/vehicles",
+            icon: <CarOutlined />,
           },
           {
             label: "Customers",

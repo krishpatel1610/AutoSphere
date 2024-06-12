@@ -1,4 +1,4 @@
-const CityPrice = require('../models/CityPrice');
+const CityPrice = require('../Model/CityPrice');
 
 exports.createCityPrice = async (req, res) => {
   try {

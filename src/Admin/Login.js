@@ -68,7 +68,7 @@ const Login = () => {
       alert("Login successful!!");
       localStorage.setItem("userData", JSON.stringify(json));
       console.log(localStorage.getItem("userData"));
-      navigate("/Admin");
+      navigate("/Admin/dashboard");
 
       // Optionally update the authToken if the response contains a new one
       if (json.authToken) {

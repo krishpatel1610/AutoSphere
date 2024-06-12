@@ -1,4 +1,4 @@
-const Vehicle = require('../models/Vehicle');
+const Vehicle = require('../Model/Vehicle');
 
 exports.createVehicle = async (req, res) => {
   try {

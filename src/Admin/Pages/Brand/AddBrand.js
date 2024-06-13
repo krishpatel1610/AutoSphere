@@ -1,42 +1,54 @@
+// Import necessary dependencies
 import React, { useState } from "react";
 import { Button, TextField, Typography } from "@material-ui/core";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import axios from "axios";
 import AppFooter from "../../Components/AppFooter";
 import SideMenu from "../../Components/SideMenu";
 import AppHeader from "../../Components/AppHeader";
-import { createBrands } from "../../API"; // Import the createBrands function from your API file
+// Import the addBrand action creator
+import { addBrand } from "../../redux/Actions";
+// Import the useDispatch hook from react-redux
+import { useDispatch } from "react-redux";
+// Import the useNavigate hook from react-router-dom
 import { useNavigate } from "react-router-dom";
 
 function AddBrand() {
+  // Initialize state variables
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [file, setFile] = useState(null);
-  const [error, setError] = useState(null); // State to store error message
+  const [error, setError] = useState(null);
+
+  // Initialize useDispatch hook
+  const dispatch = useDispatch();
+  // Initialize useNavigate hook
   let navigate = useNavigate();
 
+  // Event handler for name change
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
+  // Event handler for image change
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setFile(file);
     setImageUrl(URL.createObjectURL(file));
   };
 
+  // Event handler for form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     // Create an object to hold all form data
     const formData = {
       name,
       image: imageUrl || "", // Use imageUrl if present, otherwise use an empty string
     };
-  
-    console.log(formData);
+
     try {
-      await createBrands(formData); // Pass formData to createBrands function
+      // Dispatch the addBrand action creator with formData
+      await dispatch(addBrand(formData));
       console.log("Brand added successfully!");
       alert("Brand added successfully!");
       navigate('/Admin/brand');
@@ -46,11 +58,6 @@ function AddBrand() {
       setError("Failed to add brand. Please try again."); // Set error message
     }
   };
-  
-  
-  
-  
-  
 
   return (
     <div className="App">

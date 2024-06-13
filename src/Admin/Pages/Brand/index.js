@@ -1,23 +1,24 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch and useSelector
-import { fetchBrands } from '../../redux/Actions'; // Import fetchBrands action creator
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchBrands } from '../../redux/Actions/brandActions';
 import { Button, Space, Table, Typography } from "antd";
 import AppFooter from "../../Components/AppFooter";
 import AppHeader from "../../Components/AppHeader";
 import SideMenu from "../../Components/SideMenu";
 
 function Brand() {
-  const dispatch = useDispatch(); // Initialize useDispatch hook
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { brands, loading, error } = useSelector(state => state.brand); // Get brands and loading state from Redux store
+  const { brands, loading, error } = useSelector(state => state.brand);
 
   useEffect(() => {
-    // Dispatch fetchBrands action on component mount
     dispatch(fetchBrands());
   }, [dispatch]);
 
-  // Function to handle the click event and navigate to "/Admin/AddBrand"
+  // Log brands data before rendering the table
+  console.log("Brands data from Redux:", brands);
+
   const handleAddBrandClick = () => {
     navigate("/Admin/AddBrand");
   };
@@ -57,7 +58,7 @@ function Brand() {
             <Table
               loading={loading}
               columns={columns}
-              dataSource={brands} // Use brands data from Redux store
+              dataSource={brands}
               pagination={{
                 pageSize: 5,
               }}

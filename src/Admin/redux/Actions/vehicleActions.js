@@ -170,15 +170,59 @@ export const fetchCategories = () => {
     }
   };
 };
-
 // Action creator for adding a new vehicle
 export const addVehicle = (vehicleData) => {
   return async (dispatch) => {
     dispatch(addVehicleRequest());
 
     try {
-      const { name, imageLink } = vehicleData;
-      const payload = { name, image: imageLink };
+      // Destructure vehicleData with default values for optional fields
+      const {
+        category_id,
+        brand_id,
+        name,
+        images,
+        imageUrl, // Optional field
+        vehicleType,
+        transmission,
+        engineSize,
+        overview,
+        variants,
+        cityPrices,
+        colors
+      } = vehicleData;
+
+      // Validate required fields are present
+      if (!name || !category_id || !brand_id || !images || !vehicleType || !transmission || !engineSize || !overview || !variants || !cityPrices || !colors) {
+        throw new Error('Incomplete vehicle data');
+      }
+
+      // Format payload according to backend API requirements
+      const payload = {
+        category_id,
+        brand_id,
+        name,
+        images: images.map(img => img.url), // Ensure images is an array and map to extract URLs
+        imageUrl: imageUrl || null, // Use imageUrl if provided, otherwise send null
+        vehicle_type: vehicleType, // Assuming vehicleType is a single string
+        transmission: Array.isArray(transmission) ? transmission : [transmission], // Ensure transmission is an array
+        engine_size: engineSize,
+        overview,
+        variants: variants.map(variant => ({
+          name: variant.name,
+          engine_size: variant.engine_size,
+          transmission_type: Array.isArray(variant.transmission_type) ? variant.transmission_type : [variant.transmission_type], // Ensure transmission_type is an array
+          price: variant.price
+        })),
+        city_price: cityPrices.map(cityPrice => ({
+          name: cityPrice.city,
+          price: cityPrice.price
+        })),
+        colors: colors.map(color => ({
+          name: color.name,
+          image_url: color.image_url
+        }))
+      };
 
       const response = await fetch("http://localhost:5000/api/vehicles", {
         method: "POST",
@@ -189,16 +233,22 @@ export const addVehicle = (vehicleData) => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        // Handle the case where response is not ok (HTTP status not in the range 200-299)
+        const errorMessage = await response.json(); // Parse the JSON error message from response
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
       }
 
       const data = await response.json();
       dispatch(addVehicleSuccess(data));
+      alert("Vehicle added successfully");
     } catch (error) {
+      // Catch any errors thrown during fetch or processing the response
       dispatch(addVehicleFailure(error.message));
+      alert("Failed to add vehicle: " + error.message);
     }
   };
 };
+
 
 // Action creator for adding a new brand
 export const addBrand = (brandData) => {

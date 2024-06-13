@@ -1,6 +1,10 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux"; // Import useDispatch hook
+import { addVehicle } from "../../redux/Actions/vehicleActions"; // Import addVehicle action creator
+// import { fetchCategories } from '../../redux/Actions/vehicleActions';
+
 import {
   TextField,
   Button,
@@ -32,14 +36,14 @@ const transmissions = [
   { value: "I", label: "Intelligent Manual Transmission (IMT)" },
 ];
 
-const categories = [
-  { value: "Sedan", label: "Sedan" },
-  { value: "SUV", label: "SUV" },
-  { value: "Hatchback", label: "Hatchback" },
-  { value: "Compact Sedan", label: "Compact Sedan" },
-  { value: "Compact SUV", label: "Compact SUV" },
-  { value: "Convertible", label: "Convertible" },
-];
+// const categories = [
+//   { value: "Sedan", label: "Sedan" },
+//   { value: "SUV", label: "SUV" },
+//   { value: "Hatchback", label: "Hatchback" },
+//   { value: "Compact Sedan", label: "Compact Sedan" },
+//   { value: "Compact SUV", label: "Compact SUV" },
+//   { value: "Convertible", label: "Convertible" },
+// ];
 
 const cities = ["Ahmedabad", "Mumbai", "Delhi"]; // List of cities
 
@@ -53,11 +57,24 @@ const AddVehicles = () => {
   const [overview, setOverview] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [colors, setColors] = useState([{ name: "", image_url: "" }]);
   const [brands, setBrands] = useState([]);
   const [variants, setVariants] = useState([
     { name: "", engineSize: "", transmissionType: "", price: "" },
   ]);
   const [cityPrices, setCityPrices] = useState([{ city: "", price: "" }]);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    // Fetch categories from backend API
+    fetch("http://localhost:5000/api/categories")
+      .then((response) => response.json())
+      .then((data) => setCategories(data))
+      .catch((error) => console.error("Error fetching categories:", error));
+  }, []);
+
 
   useEffect(() => {
     // Fetch brands from backend API
@@ -66,6 +83,7 @@ const AddVehicles = () => {
       .then((data) => setBrands(data))
       .catch((error) => console.error("Error fetching brands:", error));
   }, []);
+  
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
@@ -140,24 +158,56 @@ const AddVehicles = () => {
     }
   };
 
+  const handleColorChange = (index, key, value) => {
+    const updatedColors = [...colors];
+    updatedColors[index][key] = value;
+    setColors(updatedColors);
+  };
+
+  const addColor = () => {
+    setColors([...colors, { name: "", image_url: "" }]);
+  };
+
+  const removeColor = (index) => {
+    const updatedColors = colors.filter((_, i) => i !== index);
+    setColors(updatedColors);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const schema = {
-      name,
-      images,
-      imageUrl,
-      vehicleType,
-      transmission,
-      engineSize,
-      overview,
-      category,
-      brand,
-      variants,
-      cityPrices,
+  
+    // Format data according to the required structure
+    const formData = {
+      category_id: category,
+      brand_id: brand,
+      name: name,
+      images: images.map((image) => image.url),
+      vehicle_type: vehicleType,
+      transmission: [transmission], // Ensure transmission is sent as an array if multiple types are selected
+      engine_size: engineSize,
+      overview: overview,
+      variants: variants.map((variant) => ({
+        name: variant.name,
+        engine_size: variant.engineSize,
+        transmission_type: [variant.transmissionType], // Ensure transmission_type is an array of strings
+        price: variant.price,
+      })),
+      city_price: cityPrices.map((cityPrice) => ({
+        name: cityPrice.city,
+        price: cityPrice.price,
+      })),
+      colors: colors.map((color) => ({
+        name: color.name,
+        image_url: color.image_url,
+      })),
     };
-    console.log(schema);
-    // You can now send `schema` to your backend API
+    console.log(formData);
+    // Now you can dispatch this formData to your database
+    dispatch(addVehicle(formData));
   };
+  
+  
+  
 
   return (
     <div className="App">
@@ -178,41 +228,45 @@ const AddVehicles = () => {
               Add Vehicle
             </Typography>
             <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-              <Grid item xs={6}>
-              <TextField
-                    label="Brand"
-                    select
-                    value={brand}
-                    onChange={(e) => setBrand(e.target.value)}
-                    fullWidth
-                    required
-                  >
-                    {brands.map((brand) => (
-                      <MenuItem key={brand._id} value={brand._id}>
-                        {brand.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
-                <Grid item xs={6} style={{ marginBottom: '16px' }}>
-                  <TextField
-                    label="Category"
-                    select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    fullWidth
-                    required
-                  >
-                    {categories.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
-                
-              </Grid>
+            <Grid container spacing={2}>
+  {/* Brand */}
+  <Grid item xs={6}>
+    <TextField
+      label="Brand"
+      select
+      value={brand}
+      onChange={(e) => setBrand(e.target.value)}
+      fullWidth
+      required
+    >
+      {brands.map((brand) => (
+        <MenuItem key={brand._id} value={brand._id}>
+          {brand.name}
+        </MenuItem>
+      ))}
+    </TextField>
+  </Grid>
+  
+  {/* Category */}
+  <Grid item xs={6} style={{ marginBottom: "16px" }}>
+  <TextField
+    label="Category"
+    select
+    value={category}
+    onChange={(e) => setCategory(e.target.value)}
+    fullWidth
+    required
+  >
+    {categories.map((cat) => (
+      <MenuItem key={cat._id} value={cat._id}>
+        {cat.name}
+      </MenuItem>
+    ))}
+  </TextField>
+</Grid>
+
+</Grid>
+
 
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -481,6 +535,51 @@ const AddVehicles = () => {
                       Add City Price
                     </Button>
                   )}
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Typography variant="h6">Color Options</Typography>
+                  {colors.map((color, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        alignItems: "center",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      <TextField
+                        label="Color Name"
+                        value={color.name}
+                        onChange={(e) =>
+                          handleColorChange(index, "name", e.target.value)
+                        }
+                        fullWidth
+                        required
+                      />
+                      <TextField
+                        label="Image URL"
+                        value={color.image_url}
+                        onChange={(e) =>
+                          handleColorChange(index, "image_url", e.target.value)
+                        }
+                        fullWidth
+                        required
+                      />
+                      <IconButton onClick={() => removeColor(index)}>
+                        <RemoveIcon />
+                      </IconButton>
+                    </div>
+                  ))}
+                  <Button
+                    variant="contained"
+                    onClick={addColor}
+                    startIcon={<AddIcon />}
+                    style={{ marginTop: "10px" }}
+                  >
+                    Add Color Option
+                  </Button>
                 </Grid>
 
                 <Grid item xs={12}>

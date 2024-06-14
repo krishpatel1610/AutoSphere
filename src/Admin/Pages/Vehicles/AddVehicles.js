@@ -4,9 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch hook
 import { addVehicle } from "../../redux/Actions/vehicleActions"; // Import addVehicle action creator
 // import { fetchCategories } from '../../redux/Actions/vehicleActions';
-import {
-  CloudUploadOutlined, 
-} from '@ant-design/icons';
+import { CloudUploadOutlined } from "@ant-design/icons";
 import {
   TextField,
   Button,
@@ -25,6 +23,7 @@ import {
 import AppFooter from "../../Components/AppFooter";
 import SideMenu from "../../Components/SideMenu";
 import AppHeader from "../../Components/AppHeader";
+import { useNavigate } from "react-router-dom";
 
 const vehicleTypes = [
   { value: "P", label: "Petrol" },
@@ -68,7 +67,7 @@ const AddVehicles = () => {
   ]);
   const [cityPrices, setCityPrices] = useState([{ city: "", price: "" }]);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     // Fetch categories from backend API
@@ -78,7 +77,6 @@ const AddVehicles = () => {
       .catch((error) => console.error("Error fetching categories:", error));
   }, []);
 
-
   useEffect(() => {
     // Fetch brands from backend API
     fetch("http://localhost:5000/api/brands")
@@ -86,7 +84,6 @@ const AddVehicles = () => {
       .then((data) => setBrands(data))
       .catch((error) => console.error("Error fetching brands:", error));
   }, []);
-  
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
@@ -178,7 +175,7 @@ const AddVehicles = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
+
     // Format data according to the required structure
     const formData = {
       category_id: category,
@@ -189,26 +186,34 @@ const AddVehicles = () => {
       transmission: [transmission], // Ensure transmission is an array
       engine_size: engineSize,
       overview: overview,
-      variants: variants.map(variant => ({
+      variants: variants.map((variant) => ({
         name: variant.name,
         engine_size: variant.engineSize,
         transmission_type: [variant.transmissionType], // Ensure transmission_type is an array
-        price: variant.price
+        price: variant.price,
       })),
-      city_price: cityPrices.map(cityPrice => ({
+      city_price: cityPrices.map((cityPrice) => ({
         name: cityPrice.city,
-        price: cityPrice.price
+        price: cityPrice.price,
       })),
-      colors: colors.map(color => ({
+      colors: colors.map((color) => ({
         name: color.name,
-        image_url: color.image_url
-      }))
+        image_url: color.image_url,
+      })),
     };
     console.log(formData);
     // Now you can dispatch this formData to your database
-    dispatch(addVehicle(formData));
+    dispatch(addVehicle(formData))
+      .then(() => {
+        // On success, navigate to /Admin/Vehicles
+        navigate("/Admin/Vehicles");
+      })
+      .catch((error) => {
+        console.error("Error adding vehicle:", error.message);
+        // Handle error scenarios
+      });
   };
-  
+
   return (
     <div className="App">
       <AppHeader />
@@ -228,45 +233,43 @@ const AddVehicles = () => {
               Add Vehicle
             </Typography>
             <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-  {/* Brand */}
-  <Grid item xs={6}>
-    <TextField
-      label="Brand"
-      select
-      value={brand}
-      onChange={(e) => setBrand(e.target.value)}
-      fullWidth
-      required
-    >
-      {brands.map((brand) => (
-        <MenuItem key={brand._id} value={brand._id}>
-          {brand.name}
-        </MenuItem>
-      ))}
-    </TextField>
-  </Grid>
-  
-  {/* Category */}
-  <Grid item xs={6} style={{ marginBottom: "16px" }}>
-  <TextField
-    label="Category"
-    select
-    value={category}
-    onChange={(e) => setCategory(e.target.value)}
-    fullWidth
-    required
-  >
-    {categories.map((cat) => (
-      <MenuItem key={cat._id} value={cat._id}>
-        {cat.name}
-      </MenuItem>
-    ))}
-  </TextField>
-</Grid>
+              <Grid container spacing={2}>
+                {/* Brand */}
+                <Grid item xs={6}>
+                  <TextField
+                    label="Brand"
+                    select
+                    value={brand}
+                    onChange={(e) => setBrand(e.target.value)}
+                    fullWidth
+                    required
+                  >
+                    {brands.map((brand) => (
+                      <MenuItem key={brand._id} value={brand._id}>
+                        {brand.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
 
-</Grid>
-
+                {/* Category */}
+                <Grid item xs={6} style={{ marginBottom: "16px" }}>
+                  <TextField
+                    label="Category"
+                    select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    fullWidth
+                    required
+                  >
+                    {categories.map((cat) => (
+                      <MenuItem key={cat._id} value={cat._id}>
+                        {cat.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+              </Grid>
 
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -291,14 +294,20 @@ const AddVehicles = () => {
                     <Button
                       variant="contained"
                       onClick={handleImagePreview}
-                      style={{backgroundColor:"#5214ae", color:"white"}}
+                      style={{ backgroundColor: "#5214ae", color: "white" }}
                       disabled={!imageUrl.trim()}
                       startIcon={<AddIcon />}
                       fullWidth
                     >
                       Add Url Image
                     </Button>
-                    <Button variant="contained" component="label" style={{backgroundColor:"#5214ae"}} startIcon={<CloudUploadOutlined />}  fullWidth>
+                    <Button
+                      variant="contained"
+                      component="label"
+                      style={{ backgroundColor: "#5214ae" }}
+                      startIcon={<CloudUploadOutlined />}
+                      fullWidth
+                    >
                       Upload from Device
                       <input
                         type="file"
@@ -479,7 +488,7 @@ const AddVehicles = () => {
                   <Button
                     variant="contained"
                     onClick={addVariant}
-                    style={{backgroundColor:"#5214ae"}}
+                    style={{ backgroundColor: "#5214ae" }}
                     startIcon={<AddIcon />}
                   >
                     Add Variant
@@ -533,7 +542,7 @@ const AddVehicles = () => {
                       variant="contained"
                       onClick={addCityPrice}
                       startIcon={<AddIcon />}
-                      style={{ marginTop: "10px", backgroundColor:"#5214ae" }}
+                      style={{ marginTop: "10px", backgroundColor: "#5214ae" }}
                     >
                       Add City Price
                     </Button>
@@ -579,7 +588,7 @@ const AddVehicles = () => {
                     variant="contained"
                     onClick={addColor}
                     startIcon={<AddIcon />}
-                    style={{ marginTop: "10px",backgroundColor:"#5214ae" }}
+                    style={{ marginTop: "10px", backgroundColor: "#5214ae" }}
                   >
                     Add Color Option
                   </Button>
@@ -590,7 +599,7 @@ const AddVehicles = () => {
                     type="submit"
                     variant="contained"
                     color="primary"
-                    style={{backgroundColor:"#5214ae"}}
+                    style={{ backgroundColor: "#5214ae" }}
                     fullWidth
                   >
                     Add Vehicle

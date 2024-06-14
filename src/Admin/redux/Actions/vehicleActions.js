@@ -1,5 +1,4 @@
 // src/Admin/redux/Actions/vehicleActions.js
-import { useNavigate } from "react-router-dom";
 
 // Define action types for vehicles
 export const FETCH_VEHICLES_REQUEST = 'FETCH_VEHICLES_REQUEST';
@@ -251,8 +250,6 @@ export const addVehicle = (vehicleData) => {
       const data = await response.json();
       dispatch(addVehicleSuccess(data));
       alert("Vehicle added successfully");
-      let navigate = useNavigate();
-      navigate('/Admin/vehicles');
     } catch (error) {
       // Catch any errors thrown during fetch or processing the response
       console.error("Error adding vehicle:", error.message);

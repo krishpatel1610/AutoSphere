@@ -170,7 +170,7 @@ function Vehicles() {
               columns={columns}
               dataSource={dataSource}
               pagination={{
-                pageSize: 5,
+                pageSize: 4,
               }}
               rowKey="_id"
             />

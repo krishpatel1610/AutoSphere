@@ -48,7 +48,7 @@ const Signup = () => {
               <div className="position-absolute w-100 h-100 bg-blue shadow-lg skew-box unskew-box rounded-3"></div>
               <div className="position-relative bg-white shadow-lg rounded-3 p-4">
                 <div className="mx-auto">
-                  <h1 className="h4 font-weight-bold">Registration</h1>
+                  <h1 className="h4 font-weight-bold" style={{color:"#5214ae"}}>Registration</h1>
                   <div className="mt-4">
                   <div className="form-group">
                       <label htmlFor="name" className="form-label">Name</label>
@@ -67,10 +67,10 @@ const Signup = () => {
                       <input type="password" className="form-control" id="cpassword" name="cpassword" placeholder="Re-Enter Password" autoComplete="off" value={credantials.cpassword} onChange={onChange} />
                     </div><br/>
                     <div className="form-group">
-                      <button className="btn btn-primary w-100" onClick={handleSubmit}>Register</button>
+                      <button className="btn btn-primary w-100" onClick={handleSubmit} style={{backgroundColor:"#5214ae"}}>Register</button>
                     </div><br/>
                     <center><div className="form-group text-align-center">
-                      Already have an account? <Link className="w-100" style={{textDecoration: "none"}} to="/Admin">Login</Link>
+                      Already have an account? <Link className="w-100" style={{textDecoration: "none",color:"#5214ae"}} to="/Admin">Login</Link>
                     </div></center>
                   </div>
                 </div>

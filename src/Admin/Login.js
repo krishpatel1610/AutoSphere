@@ -89,7 +89,7 @@ const Login = () => {
               <div className="position-absolute w-100 h-100 bg-blue shadow-lg skew-box unskew-box rounded-3"></div>
               <div className="position-relative bg-white shadow-lg rounded-3 p-4">
                 <div className="mx-auto">
-                  <h1 className="h4 font-weight-bold">Login</h1>
+                  <h1 className="h4 font-weight-bold" style={{color:"#5214ae"}}>Login</h1>
                   <div className="mt-4">
                     <div className="form-group">
                       <label htmlFor="email" className="form-label">
@@ -126,6 +126,7 @@ const Login = () => {
                       <button
                         className="btn btn-primary w-100"
                         onClick={handleSubmit}
+                        style={{backgroundColor:"#5214ae"}}
                       >
                         Login
                       </button>
@@ -136,7 +137,7 @@ const Login = () => {
                         Don't have any account?{" "}
                         <Link
                           className="w-100"
-                          style={{ textDecoration: "none" }}
+                          style={{ textDecoration: "none",color:"#5214ae" }}
                           to="/Admin/Signup"
                         >
                           Register

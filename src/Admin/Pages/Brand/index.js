@@ -51,6 +51,14 @@ function Brand() {
           <Space size={20} direction="vertical">
             <Space size={20} direction="horizontal" style={{ alignItems: 'center' }}>
               <Typography.Title level={4} style={{ margin: 0 }}>Brand</Typography.Title>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
               <Button type="primary" onClick={handleAddBrandClick}>
                 Add Brand
               </Button>

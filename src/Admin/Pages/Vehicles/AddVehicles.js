@@ -181,34 +181,31 @@ const AddVehicles = () => {
       category_id: category,
       brand_id: brand,
       name: name,
-      images: images.map((image) => image.url),
-      vehicle_type: vehicleType,
-      transmission: [transmission], // Ensure transmission is sent as an array if multiple types are selected
+      images: images, // images should already be an array of objects with `url` key
+      vehicle_type: vehicleType, // Ensuring vehicleType is directly passed as a string
+      transmission: [transmission], // Ensure transmission is an array
       engine_size: engineSize,
       overview: overview,
-      variants: variants.map((variant) => ({
+      variants: variants.map(variant => ({
         name: variant.name,
         engine_size: variant.engineSize,
-        transmission_type: [variant.transmissionType], // Ensure transmission_type is an array of strings
-        price: variant.price,
+        transmission_type: [variant.transmissionType], // Ensure transmission_type is an array
+        price: variant.price
       })),
-      city_price: cityPrices.map((cityPrice) => ({
+      city_price: cityPrices.map(cityPrice => ({
         name: cityPrice.city,
-        price: cityPrice.price,
+        price: cityPrice.price
       })),
-      colors: colors.map((color) => ({
+      colors: colors.map(color => ({
         name: color.name,
-        image_url: color.image_url,
-      })),
+        image_url: color.image_url
+      }))
     };
     console.log(formData);
     // Now you can dispatch this formData to your database
     dispatch(addVehicle(formData));
   };
   
-  
-  
-
   return (
     <div className="App">
       <AppHeader />

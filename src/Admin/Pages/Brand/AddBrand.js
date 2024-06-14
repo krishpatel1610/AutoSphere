@@ -6,7 +6,7 @@ import AppFooter from "../../Components/AppFooter";
 import SideMenu from "../../Components/SideMenu";
 import AppHeader from "../../Components/AppHeader";
 // Import the addBrand action creator
-import { addBrand } from "../../redux/Actions";
+import { addBrand } from "../../redux/Actions/brandActions";
 // Import the useDispatch hook from react-redux
 import { useDispatch } from "react-redux";
 // Import the useNavigate hook from react-router-dom

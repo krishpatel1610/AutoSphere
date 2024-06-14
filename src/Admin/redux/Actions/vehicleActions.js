@@ -182,18 +182,25 @@ export const addVehicle = (vehicleData) => {
         brand_id,
         name,
         images,
-        imageUrl, // Optional field
-        vehicleType,
+        vehicle_type, // Assuming it is a single string and not an array
         transmission,
-        engineSize,
+        engine_size,
         overview,
         variants,
-        cityPrices,
+        city_price,
         colors
       } = vehicleData;
 
+      // Log received data for debugging
+      console.log("Received vehicle data:", vehicleData);
+
       // Validate required fields are present
-      if (!name || !category_id || !brand_id || !images || !vehicleType || !transmission || !engineSize || !overview || !variants || !cityPrices || !colors) {
+      if (!category_id || !brand_id || !name || !images || !vehicle_type || !transmission || !engine_size || !overview || !variants || !city_price || !colors) {
+        throw new Error('Incomplete vehicle data');
+      }
+
+      // Check for empty arrays or missing data within arrays
+      if (images.length === 0 || transmission.length === 0 || variants.length === 0 || city_price.length === 0 || colors.length === 0) {
         throw new Error('Incomplete vehicle data');
       }
 
@@ -203,10 +210,9 @@ export const addVehicle = (vehicleData) => {
         brand_id,
         name,
         images: images.map(img => img.url), // Ensure images is an array and map to extract URLs
-        imageUrl: imageUrl || null, // Use imageUrl if provided, otherwise send null
-        vehicle_type: vehicleType, // Assuming vehicleType is a single string
+        vehicle_type: [vehicle_type], // Assuming vehicleType should be an array
         transmission: Array.isArray(transmission) ? transmission : [transmission], // Ensure transmission is an array
-        engine_size: engineSize,
+        engine_size,
         overview,
         variants: variants.map(variant => ({
           name: variant.name,
@@ -214,8 +220,8 @@ export const addVehicle = (vehicleData) => {
           transmission_type: Array.isArray(variant.transmission_type) ? variant.transmission_type : [variant.transmission_type], // Ensure transmission_type is an array
           price: variant.price
         })),
-        city_price: cityPrices.map(cityPrice => ({
-          name: cityPrice.city,
+        city_price: city_price.map(cityPrice => ({
+          name: cityPrice.name,
           price: cityPrice.price
         })),
         colors: colors.map(color => ({
@@ -223,6 +229,9 @@ export const addVehicle = (vehicleData) => {
           image_url: color.image_url
         }))
       };
+
+      // Log payload for debugging
+      console.log("Payload to be sent:", payload);
 
       const response = await fetch("http://localhost:5000/api/vehicles", {
         method: "POST",
@@ -243,12 +252,12 @@ export const addVehicle = (vehicleData) => {
       alert("Vehicle added successfully");
     } catch (error) {
       // Catch any errors thrown during fetch or processing the response
+      console.error("Error adding vehicle:", error.message);
       dispatch(addVehicleFailure(error.message));
       alert("Failed to add vehicle: " + error.message);
     }
   };
 };
-
 
 // Action creator for adding a new brand
 export const addBrand = (brandData) => {

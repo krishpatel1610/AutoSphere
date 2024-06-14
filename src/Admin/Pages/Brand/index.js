@@ -59,6 +59,24 @@ function Brand() {
               <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
               <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
               <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
+              <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
               <Button type="primary" onClick={handleAddBrandClick}>
                 Add Brand
               </Button>
@@ -70,6 +88,7 @@ function Brand() {
               pagination={{
                 pageSize: 5,
               }}
+              style={{width:"805px"}}
             />
           </Space>
         </div>

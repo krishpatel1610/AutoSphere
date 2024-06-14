@@ -3,11 +3,8 @@ import {
   CarOutlined,
   CarFilled,
 } from "@ant-design/icons";
-import { Card, Space, Statistic, Table, Typography } from "antd";
+import { Badge,Card, Space, Statistic, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { fetchCategories, fetchVehicles } from '../../redux/Actions/vehicleActions';
-// import { useDispatch, useSelector } from 'react-redux';
-import { getCustomers, getInventory, getOrders, getRevenue } from "../../API";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -29,38 +26,16 @@ ChartJS.register(
 );
 
 function Dashboard() {
-  // const [orders, setOrders] = useState(0);
-  // const [inventory, setInventory] = useState(0);
-  const [customers, setCustomers] = useState(0);
-  const [revenue, setRevenue] = useState(0);
   const [brands, setBrands] = useState([]);
   const [vehicales, setVehicles] = useState([]);
   const [categories, setCategories] = useState([]);
-  // const [vehicle, setVehicle] = useState([]);
   const [sedanCount, setSedanCount] = useState(0);
   const [suvCount, setSUVCount] = useState(0);
   const [hatchbackCount, setHatchbackCount] = useState(0);
   const [crossoverCount, setCrossoverCount] = useState(0);
   const [convertibleCount, setConvertibleCount] = useState(0);
   const [pickupCount, setPickupCount] = useState(0);
-  // const dispatch = useDispatch();
-  // const vehicle = useSelector(state => state.vehicles || []);
-  // const categories = useSelector(state => state.categories || []);
-
-
-  useEffect(() => {
-    getOrders().then((res) => {
-      // setOrders(res.total);
-      setRevenue(res.discountedTotal);
-    });
-    getInventory().then((res) => {
-      // setInventory(res.total);
-    });
-    getCustomers().then((res) => {
-      setCustomers(res.total);
-    });
-  }, []);
-
+  
   useEffect(() => {
     // Fetch brands from backend API
     fetch("http://localhost:5000/api/brands")
@@ -82,12 +57,6 @@ function Dashboard() {
       .then((data) => setCategories(data))
       .catch((error) => console.error("Error fetching brands:", error));
   }, []);
-
-  // useEffect(() => {
-  //   // Fetch initial data on component mount
-  //   dispatch(fetchCategories());
-  //   dispatch(fetchVehicles());
-  // }, [dispatch]);
 
   useEffect(() => {
     if (categories.length > 0 && vehicales.length > 0) {
@@ -183,95 +152,95 @@ function Dashboard() {
         <Typography.Title level={5}>Categories</Typography.Title>
         <Space direction="horizontal">
         <DashboardCard
-          icon={
-            <CarFilled 
-              style={{
-                color: "purple",
-                backgroundColor: "rgba(0,255,255,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Sedan"}
-          value={sedanCount}
-        />
-        <DashboardCard
-          icon={
-            <CarFilled
-              style={{
-                color: "purple",
-                backgroundColor: "rgba(0,255,255,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Suv"}
-          value={suvCount}
-        />
-        <DashboardCard
-          icon={
-            <CarFilled
-              style={{
-                color: "purple",
-                backgroundColor: "rgba(0,255,255,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Hatchback"}
-          value={hatchbackCount}
-        />
-        <DashboardCard
-          icon={
-            <CarFilled
-              style={{
-                color: "purple",
-                backgroundColor: "rgba(0,255,255,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Crossover"}
-          value={crossoverCount}
-        />
-        <DashboardCard
-          icon={
-            <CarFilled
-              style={{
-                color: "purple",
-                backgroundColor: "rgba(0,255,255,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Convertible"}
-          value={convertibleCount}
-        />
-        <DashboardCard
-          icon={
-            <CarFilled
-              style={{
-                color: "purple",
-                backgroundColor: "rgba(0,255,255,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Pickup"}
-          value={pickupCount}
-        />
+        icon={
+          <CarFilled
+            style={{
+              color: "purple",
+              backgroundColor: "rgba(0,255,255,0.25)",
+              borderRadius: 20,
+              fontSize: 24,
+              padding: 8,
+            }}
+          />
+        }
+        title={"Sedan"}
+        value={sedanCount}
+      />
+      <DashboardCard
+        icon={
+          <CarFilled
+            style={{
+              color: "green",
+              backgroundColor: "rgba(0,255,0,0.25)", // Changed to green background
+              borderRadius: 20,
+              fontSize: 24,
+              padding: 8,
+            }}
+          />
+        }
+        title={"Suv"}
+        value={suvCount}
+      />
+      <DashboardCard
+        icon={
+          <CarFilled
+            style={{
+              color: "orange",
+              backgroundColor: "rgba(255,165,0,0.25)",
+              borderRadius: 20,
+              fontSize: 24,
+              padding: 8,
+            }}
+          />
+        }
+        title={"Hatchback"}
+        value={hatchbackCount}
+      />
+      <DashboardCard
+        icon={
+          <CarFilled
+            style={{
+              color: "darkorchid", // Changed to dark orchid
+              backgroundColor: "rgba(153,50,204,0.25)", // Dark orchid background
+              borderRadius: 20,
+              fontSize: 24,
+              padding: 8,
+            }}
+          />
+        }
+        title={"Crossover"}
+        value={crossoverCount}
+      />
+      <DashboardCard
+        icon={
+          <CarFilled
+            style={{
+              color: "goldenrod", // Changed to goldenrod
+              backgroundColor: "rgba(218,165,32,0.25)", // Goldenrod background
+              borderRadius: 20,
+              fontSize: 24,
+              padding: 8,
+            }}
+          />
+        }
+        title={"Convertible"}
+        value={convertibleCount}
+      />
+      <DashboardCard
+        icon={
+          <CarFilled
+            style={{
+              color: "maroon", // Changed to maroon
+              backgroundColor: "rgba(128,0,0,0.25)", // Light maroon background
+              borderRadius: 20,
+              fontSize: 24,
+              padding: 8,
+            }}
+          />
+        }
+        title={"Pickup"}
+        value={pickupCount}
+      />
         </Space>
         
       
@@ -341,20 +310,26 @@ function RecentOrders() {
       });
   }, []);
 
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      render: (text) => <Typography.Text strong>{text}</Typography.Text>,
+    },
+    {
+      title: "Vehicle Inventory",
+      dataIndex: "carCount",
+      render: (count) => (
+        <Badge count={count} style={{ backgroundColor: '#5214ae' }} />
+      ),
+    }
+  ];
+
   return (
     <>
-      <Typography.Text>Top 3 Brands by Car Count</Typography.Text>
+      <Typography.Text strong>Top 3 Companies by Car Inventory</Typography.Text>
       <Table
-        columns={[
-          {
-            title: "Name",
-            dataIndex: "name",
-          },
-          {
-            title: "Car Count",
-            dataIndex: "carCount",
-          }
-        ]}
+        columns={columns}
         loading={loading}
         dataSource={brandData}
         pagination={false}
@@ -397,9 +372,6 @@ function DashboardChart() {
 
       const carCounts = await Promise.all(fetchCarCounts);
 
-      const revenueResponse = await getRevenue();
-      const labels = revenueResponse.carts.map((cart) => `User-${cart.userId}`);
-      const data = revenueResponse.carts.map((cart) => cart.discountedTotal);
 
       const dataSource = {
         labels: brandNames, // Brand names on x-axis
@@ -407,7 +379,7 @@ function DashboardChart() {
           {
             label: "Car Count",
             data: carCounts, // Car counts on y-axis
-            backgroundColor: "rgba(255, 0, 0, 0.6)", // Adjust the color as needed
+            backgroundColor: "#5214ae", // Adjust the color as needed
           },
         ],
       };

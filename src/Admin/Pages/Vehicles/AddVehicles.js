@@ -4,7 +4,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch hook
 import { addVehicle } from "../../redux/Actions/vehicleActions"; // Import addVehicle action creator
 // import { fetchCategories } from '../../redux/Actions/vehicleActions';
-
+import {
+  CloudUploadOutlined, 
+} from '@ant-design/icons';
 import {
   TextField,
   Button,
@@ -13,6 +15,7 @@ import {
   Grid,
   IconButton,
   Box,
+  styled,
 } from "@mui/material";
 import {
   Add as AddIcon,
@@ -288,12 +291,14 @@ const AddVehicles = () => {
                     <Button
                       variant="contained"
                       onClick={handleImagePreview}
+                      style={{backgroundColor:"#5214ae", color:"white"}}
                       disabled={!imageUrl.trim()}
+                      startIcon={<AddIcon />}
                       fullWidth
                     >
                       Add Url Image
                     </Button>
-                    <Button variant="contained" component="label" fullWidth>
+                    <Button variant="contained" component="label" style={{backgroundColor:"#5214ae"}} startIcon={<CloudUploadOutlined />}  fullWidth>
                       Upload from Device
                       <input
                         type="file"
@@ -474,6 +479,7 @@ const AddVehicles = () => {
                   <Button
                     variant="contained"
                     onClick={addVariant}
+                    style={{backgroundColor:"#5214ae"}}
                     startIcon={<AddIcon />}
                   >
                     Add Variant
@@ -527,7 +533,7 @@ const AddVehicles = () => {
                       variant="contained"
                       onClick={addCityPrice}
                       startIcon={<AddIcon />}
-                      style={{ marginTop: "10px" }}
+                      style={{ marginTop: "10px", backgroundColor:"#5214ae" }}
                     >
                       Add City Price
                     </Button>
@@ -573,7 +579,7 @@ const AddVehicles = () => {
                     variant="contained"
                     onClick={addColor}
                     startIcon={<AddIcon />}
-                    style={{ marginTop: "10px" }}
+                    style={{ marginTop: "10px",backgroundColor:"#5214ae" }}
                   >
                     Add Color Option
                   </Button>
@@ -584,6 +590,7 @@ const AddVehicles = () => {
                     type="submit"
                     variant="contained"
                     color="primary"
+                    style={{backgroundColor:"#5214ae"}}
                     fullWidth
                   >
                     Add Vehicle

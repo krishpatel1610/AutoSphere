@@ -6,6 +6,7 @@ import { Button, Space, Table, Typography } from "antd";
 import AppFooter from "../../Components/AppFooter";
 import AppHeader from "../../Components/AppHeader";
 import SideMenu from "../../Components/SideMenu";
+import React from "react";
 
 function Brand() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function Brand() {
       title: 'Brand Image',
       dataIndex: 'image',
       key: 'image',
-      render: (image) => <img src={image} alt="Brand" style={{ width: '50px', borderRadius: '50%' }} />
+      render: (image) => <img src={image} alt="Brand" style={{ width: '50px', borderRadius: '50%' }} />,
     },
     {
       title: 'Brand Name',
@@ -77,7 +78,7 @@ function Brand() {
               <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
               <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
               <span dangerouslySetInnerHTML={{ __html: "&nbsp;" }}></span>
-              <Button type="primary" onClick={handleAddBrandClick}>
+              <Button type="primary" onClick={handleAddBrandClick} style={{backgroundColor:"#5214ae"}}>
                 Add Brand
               </Button>
             </Space>
@@ -89,6 +90,7 @@ function Brand() {
                 pageSize: 5,
               }}
               style={{width:"805px"}}
+              
             />
           </Space>
         </div>

@@ -1,13 +1,19 @@
-import { BellFilled, MailOutlined } from "@ant-design/icons";
+import { BellFilled, MailOutlined,PoweroffOutlined } from "@ant-design/icons";
 import { Badge, Drawer, Image, List, Space, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { getComments, getOrders } from "../../API";
+import { Button, Flex } from 'antd';
+import { useNavigate } from "react-router-dom";
 
 function AppHeader() {
   const [comments, setComments] = useState([]);
   const [orders, setOrders] = useState([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [loadings, setLoadings] = useState([]);
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  let navigate = useNavigate();
+  // console.log(userData);
 
   useEffect(() => {
     getComments().then((res) => {
@@ -18,15 +24,35 @@ function AppHeader() {
     });
   }, []);
 
+  const handleLogout = (index) => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userData');
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = false;
+      return newLoadings;
+    });
+    navigate('/Admin');
+  };
+
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    handleLogout(index);
+  };
+
   return (
     <div className="AppHeader" style={{ height: '60px' }}>
       <Image
-        width={40}
-        src="https://yt3.ggpht.com/ytc/AMLnZu83ghQ28n1SqADR-RbI2BGYTrqqThAtJbfv9jcq=s176-c-k-c0x00ffffff-no-rj"
+        width={100}
+        src="https://www.veroke.com/wp-content/uploads/2023/06/partner_autosphere_logo.png"
       ></Image>
-      <Typography.Title style={{ margin: "auto", fontSize: '30px' }}>Admin Dashboard</Typography.Title>
+      <Typography.Title style={{ margin: "auto", fontSize: '30px' }}>{userData.user.user.name}'s Dashboard</Typography.Title>
       <Space>
-        <Badge count={comments.length} dot>
+        <Badge count={comments.length} style={{backgroundColor:'#5214ae'}} dot>
           <MailOutlined
             style={{ fontSize: 24 }}
             onClick={() => {
@@ -34,7 +60,7 @@ function AppHeader() {
             }}
           />
         </Badge>
-        <Badge count={orders.length}>
+        <Badge count={orders.length} style={{backgroundColor:'#5214ae'}}>
           <BellFilled
             style={{ fontSize: 24 }}
             onClick={() => {
@@ -42,6 +68,15 @@ function AppHeader() {
             }}
           />
         </Badge>
+        <Button
+          type="primary"
+          icon={<PoweroffOutlined />}
+          loading={loadings[1]}
+          onClick={() => enterLoading(1)}
+          style={{marginLeft:"10px",backgroundColor:"#5214ae"}}
+        >
+          Logout!!
+        </Button>
       </Space>
       <Drawer
         title="Comments"

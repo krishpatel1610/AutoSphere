@@ -161,7 +161,7 @@ function Vehicles() {
                   </Option>
                 ))}
               </Select>
-              <Button type="primary" onClick={handleAddVehicle}>
+              <Button type="primary" onClick={handleAddVehicle} style={{backgroundColor:"#5214ae"}}>
                 Add Vehicle
               </Button>
             </Space>

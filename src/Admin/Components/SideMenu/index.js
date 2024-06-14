@@ -1,57 +1,58 @@
+import React, { useEffect, useState } from "react";
+import { Menu } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppstoreOutlined,
   ToolOutlined,
-  UserOutlined,
-  CarOutlined, 
+  CarOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
 function SideMenu() {
   const location = useLocation();
-  const [selectedKeys, setSelectedKeys] = useState("/Admin/dashbord");
+  const navigate = useNavigate();
+  const [selectedKeys, setSelectedKeys] = useState("/Admin/dashboard");
 
   useEffect(() => {
     const pathName = location.pathname;
     setSelectedKeys(pathName);
   }, [location.pathname]);
 
-  const navigate = useNavigate();
+  const handleMenuClick = (item) => {
+    navigate(item.key);
+  };
+
   return (
     <div className="SideMenu">
       <Menu
         className="SideMenuVertical"
         mode="vertical"
-        onClick={(item) => {
-          //item.key
-          navigate(item.key);
-        }}
+        onClick={handleMenuClick}
         selectedKeys={[selectedKeys]}
-        items={[
-          {
-            label: "Dashbaord",
-            icon: <AppstoreOutlined />,
-            key: "/Admin/dashboard",
-          },
-          {
-            label: "Brands",
-            key: "/Admin/brand",
-            icon: <ToolOutlined />,
-          },
-          {
-            label: "Vehicles",
-            key: "/Admin/vehicles",
-            icon: <CarOutlined />,
-          },
-          {
-            label: "Customers",
-            key: "/Admin/customers",
-            icon: <UserOutlined />,
-          },
-        ]}
-      ></Menu>
+      >
+        <Menu.Item
+          key="/Admin/dashboard"
+          icon={<AppstoreOutlined />}
+          style={selectedKeys === "/Admin/dashboard" ? { color: "#5214ae" } : null}
+        >
+          Dashboard
+        </Menu.Item>
+        <Menu.Item
+          key="/Admin/brand"
+          icon={<ToolOutlined />}
+          style={selectedKeys === "/Admin/brand" ? { color: "#5214ae" } : null}
+        >
+          Brands
+        </Menu.Item>
+        <Menu.Item
+          key="/Admin/vehicles"
+          icon={<CarOutlined />}
+          style={selectedKeys === "/Admin/vehicles" ? { color: "#5214ae" } : null}
+        >
+          Vehicles
+        </Menu.Item>
+      </Menu>
     </div>
   );
 }
+
 export default SideMenu;

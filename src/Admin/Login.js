@@ -133,6 +133,16 @@ const Login = () => {
                     </div>
                     <br />
                     <center>
+                    <div className="form-group">
+                        Forgot password?{" "}
+                        <Link
+                          className="w-100"
+                          style={{ textDecoration: "none",color:"#5214ae" }}
+                          to="/Admin/forgotpass"
+                        >
+                          Reset
+                        </Link>
+                      </div>
                       <div className="form-group">
                         Don't have any account?{" "}
                         <Link

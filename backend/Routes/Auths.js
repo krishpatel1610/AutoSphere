@@ -5,6 +5,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const jwtSecure = "Mynameiskpandyoutube!!!##"; // secure key
 const verifyToken = require('../Middleware/fetchDetails'); 
+const nodemailer = require('nodemailer');
+const crypto = require('crypto'); // For generating OTP
+const app = express(); // Create an express app instance
+app.set("view engine", "ejs"); // Set view engine to ejs
+app.use(express.urlencoded({ extended: false }));
+// const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 router.post('/createAdmin', async (req, res) => {
     try {
@@ -75,6 +82,158 @@ router.get('/Admin/auth/protected-route', verifyToken, async (req, res) => {
     res.status(200).json({ success:true,message: 'Protected employee route accessed successfully.', user: req.user });
 });
 
+// Function to generate OTP
+const generateOTP = () => {
+    const digits = '0123456789';
+    let OTP = '';
+    for (let i = 0; i < 6; i++) {
+      OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    return OTP;
+  };
+  
+  // Store OTPs temporarily (in production, use a database or session)
+  const otpStore = {};
+  
+  // Nodemailer transporter setup
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'adityarajcoder09@gmail.com',
+        pass: 'gvksrridgzhadfsc'
+    }
+  });
+  
+  // Route to send OTP to email
+  router.post('/sendOTP', async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+      // Generate OTP
+      const OTP = generateOTP();
+      otpStore[email] = OTP; // Store OTP temporarily (for demonstration)
+  
+      // Send email
+      await transporter.sendMail({
+        from: 'autosphere@gmail.com',
+        to: email,
+        subject: 'Email verification code',
+        text: `Your OTP for email verification code is ${OTP}`
+      });
+  
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      res.status(500).json({ success: false, error: 'Failed to send OTP. Please try again later.' });
+    }
+  });
+  
+  // Route to verify OTP
+  router.post('/verifyOTP', (req, res) => {
+    const { email, OTP } = req.body;
+  
+    // Compare OTP with stored OTP
+    if (otpStore[email] === OTP) {
+      res.status(200).json({ success: true });
+    } else {
+      res.status(400).json({ success: false, error: 'Invalid OTP. Please try again.' });
+    }
+  });
 
+  app.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
+    try {
+      const olduser = await Admin.findOne({ email });
+      if (!olduser) {
+        return res.json({ status: "Admin not found" });
+      }
+      const secret = jwtSecure + olduser.password;
+      const token = jwt.sign({ email: olduser.email, id: olduser._id }, secret, { expiresIn: "5m" });
+      const link = `http://localhost:5000/api/reset-password/${olduser._id}/${token}`;
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'adityarajcoder09@gmail.com',
+          pass: 'gvksrridgzhadfsc'
+        }
+      });
+      
+      var mailOptions = {
+        from: 'autosphere@gmail.com',
+        to: email,
+        subject: 'Reset Password',
+        text: link
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+      console.log(link);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+  
+  app.get("/reset-password/:id/:token", async (req, res) => {
+    const { id, token } = req.params;
+    console.log(req.params);
+    const oldUser = await Admin.findOne({ _id: id });
+    if (!oldUser) {
+      return res.json({ status: "Admin not found" });
+    }
+    const secret = jwtSecure + oldUser.password;
+    try {
+      console.log("verified")
+      const verify = jwt.verify(token, secret);
+      res.render("index", { email: verify.email, id, token ,status:"Not verified"});
+    } catch (error) {
+      console.error(error);
+      res.send("Not verified");
+    }
+  });
+  
+  app.post('/reset-password/:id/:token', async (req, res) => {
+    const { id, token } = req.params;
+    const { password } = req.body;
+  
+    try {
+      // Check if the password field is provided
+      if (!password) {
+        return res.status(400).json({ error: "Password is required" });
+      }
+  
+      // Find the admin by id
+      const oldUser = await Admin.findOne({ _id: id });
+      if (!oldUser) {
+        return res.json({ status: "Admin not Exists!" });
+      }
+  
+      // Verify the token
+      const secret = jwtSecure + oldUser.password;
+      const verify = jwt.verify(token, secret);
+  
+      // Hash the new password
+      const encryptedPassword = await bcrypt.hash(password, 10);
+      console.log("Encrypted Password:", encryptedPassword);
+  
+      // Update the password in the database
+      await Admin.updateOne({ _id: id }, {
+        $set: {
+          password: encryptedPassword,
+        }
+      });
+  
+      // Respond with success message
+      res.render("index", { email: verify.email, id, token ,status:"verified"});
+  
+    } catch (error) {
+      console.error(error);
+      res.send("Not verified");
+    }
+  });
 
-module.exports = router;
+module.exports = [router , app];

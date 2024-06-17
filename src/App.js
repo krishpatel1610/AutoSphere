@@ -9,6 +9,8 @@ import Vehicles from "./Admin/Pages/Vehicles";
 import Customers from "./Admin/Pages/Customers";
 import AddBrand from './Admin/Pages/Brand/AddBrand';
 import AddVehicles from './Admin/Pages/Vehicles/AddVehicles';
+import ForgotPassword from './Admin/ForgotPassword';
+import ResetPasswordOTP from './Admin/ResetPasswordOTP';
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
       <Routes>
         <Route path="/Admin" element={<Login />} />
         <Route path="/Admin/signup" element={<Signup />} />
+        <Route path="/Admin/forgotpass" element={<ForgotPassword />} />
+        <Route path="/Admin/OTP/:email" element={<ResetPasswordOTP />} />
         <Route path="/Admin/dashboard" element={<App1 />} />
       <Route path="/Admin/brand" element={<Brand />} />
       <Route path="/Admin/vehicles" element={<Vehicles />} />

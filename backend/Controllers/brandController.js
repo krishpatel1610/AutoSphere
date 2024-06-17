@@ -1,4 +1,5 @@
 const Brand = require('../Model/Brand');
+const mongoose = require('mongoose');
 
 // Create a new brand
 exports.createBrand = async (req, res) => {
@@ -30,6 +31,26 @@ exports.getBrandById = async (req, res) => {
             return res.status(404).send('Brand not found');
         }
         res.send(brand);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+// Delete a brand
+exports.deleteBrand = async (req, res) => {
+    try {
+        const brandId = req.params.brandId;
+
+        // Check if the ID is a valid MongoDB ObjectID
+        if (!mongoose.Types.ObjectId.isValid(brandId)) {
+            return res.status(400).json({ message: 'Invalid brand ID format' });
+        }
+
+        const brand = await Brand.findByIdAndDelete(brandId);
+        if (!brand) {
+            return res.status(404).json({ message: 'Brand not found' });
+        }
+        res.status(200).send({ message: 'Brand deleted successfully' });
     } catch (error) {
         res.status(500).send(error.message);
     }

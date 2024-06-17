@@ -11,4 +11,6 @@ router.get('/', brandController.getBrands);
 // Get brand by ID
 router.get('/:brandId', brandController.getBrandById);
 
+router.delete('/:brandId', brandController.deleteBrand);
+
 module.exports = router;

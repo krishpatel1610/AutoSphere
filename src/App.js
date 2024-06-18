@@ -11,12 +11,16 @@ import AddBrand from './Admin/Pages/Brand/AddBrand';
 import AddVehicles from './Admin/Pages/Vehicles/AddVehicles';
 import ForgotPassword from './Admin/ForgotPassword';
 import ResetPasswordOTP from './Admin/ResetPasswordOTP';
+import Dashboard from './Dashboard';
+import CheckOut from './CheckOut';
 
 
 function App() {
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/CheckOut" element={<CheckOut />} />
         <Route path="/Admin" element={<Login />} />
         <Route path="/Admin/signup" element={<Signup />} />
         <Route path="/Admin/forgotpass" element={<ForgotPassword />} />

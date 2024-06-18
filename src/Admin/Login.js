@@ -76,8 +76,9 @@ const Login = () => {
         console.log("Updated authToken:", localStorage.getItem("authToken"));
       }
     } catch (error) {
-      console.error("Error during verification:", error);
       alert("An error occurred during verification.");
+      console.error("Error during verification:", error);
+      
     }
   };
   return (

@@ -1,0 +1,144 @@
+
+/*----- car pages data ------*/
+.car-banner{
+	font-family: "Yantramanav", sans-serif;
+	width: 100%;
+	margin: 30px 0px 0px 0px;
+	padding: 10px 3%;
+	border-bottom: 1px solid #ddd;
+	box-shadow: 0 0.6rem 1rem rgba(0,0,0,0.05);
+}
+.car-banner .car-intro{
+	width: 100%;
+	margin: 10px 0%;
+	display: flex;
+	flex: 1 1 auto;
+	grid-gap: 10px;
+}
+.car-banner .car-intro .car-show{
+	margin-top: 20px;
+	overflow: hidden;
+	width: 100%;
+	border-radius: 10px;
+	text-align: center;
+}
+.car-banner .car-intro .car-show img{
+	width: 100%;
+	border-radius: 10px;
+}
+.car-body{
+	width: 70%;
+	margin: 40px 5% 40px 5%;
+}
+.car-body .rating{
+	margin: 0px 0px;
+	font-size: 14px;
+	color: #e6e6e6;
+}
+.car-body .rating span{
+	margin: 2px;
+}
+.car-body .checked{
+	color: #21618C;
+}
+.car-body a{
+	color: #21618C;
+	font-size: 14px;
+	font-weight: 500;
+	padding-left: 20px;
+	text-decoration: none;
+}
+.car-body h2.car-price{
+	line-height: 40px;
+	margin-top: 30px;
+}
+.car-body span.car-span{
+	line-height: 20px;
+	font-size: 14px;
+	font-weight: 300;
+}
+.car-body button{
+	display: block;
+	margin: 20px 0px 10px 0px;
+	padding: 12px 20px;
+	font-size: 16px;
+	font-weight: 600;
+	font-family: "Yantramanav", sans-serif;
+	background-color: rgb(102, 56, 172);
+	color: #fff;
+	border: 1px solid #e6e6e6;
+	border-radius: 5px;
+}
+.car-body span.selling{
+	font-size: 14px;
+	color: #757575;
+}
+.car-box{
+	margin-top: 30px;
+	display: grid;
+	grid-template-columns: auto auto;
+	border: 1px solid #e3e3fc;
+	height: 100%;
+	border-radius: 10px;
+}
+.car-box .feature-box{
+	border-radius: 10px;
+	padding: 20px 10px;
+	width: 160px;
+	font-family: "Poppins", sans-serif;
+	color: rgb(102, 56, 172);
+	text-align: center;
+	cursor: pointer;
+}
+.car-box .feature-box:hover{
+	background-color: #f7f7f7;
+}
+.car-review h3.title{
+	margin: 30px 0px 10px 0px;
+	font-size: 20px;
+	border-left: 3px solid #cccccc;
+	padding: 4px 8px;
+	color: rgb(102, 56, 172);
+}
+.car-review h3{
+	margin: 30px 0px 0px 0px;
+	font-size: 18px;
+	padding: 4px 8px;
+	color: #000;
+}
+.car-review p{
+	font-size: 16px;
+	line-height: 25px;
+	padding: 0px 5% 0px 10px;
+}
+/* / breadcrumb / */
+.breadcrumb {
+	font-family: "Yantramanav", sans-serif;
+	font-size: 12px;
+	margin: 20px 5% 0px 5%;
+	text-align: left;
+	font-weight: 400;
+}
+.breadcrumb a,.breadcrumb i{
+	color: #8f8f8f;
+	text-decoration: none;
+	padding: 0px 2px;
+}
+.breadcrumb a:hover{
+	color: rgb(102, 56, 172);
+	transition: .3s;
+}
+
+.link {
+    font-size: 16px;
+    font-weight: 500;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s;
+    margin-right: 20px;
+  }
+  
+  .link:hover {
+    color: rgb(102, 56, 172);
+  }

@@ -34,3 +34,13 @@ exports.getBrandCarCount = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+exports.getVehiclesByCategory = async (categoryId) => {
+  try {
+    const vehicles = await Vehicle.find({ category_id: categoryId });
+    return vehicles;
+  } catch (error) {
+    console.error('Error fetching vehicles by category:', error);
+    throw new Error('Failed to fetch vehicles by category');
+  }
+};

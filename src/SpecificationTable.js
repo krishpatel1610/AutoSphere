@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './components/Checkout.css';
+import { ArrowRightOutlined } from '@ant-design/icons'; // Import ArrowRightOutlined from Ant Design
 
-const SwiftSpecificationTable = () => {
+const SpecificationTable = () => {
   const { id } = useParams();
   const [vehicleData, setVehicleData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [alternativeCars, setAlternativeCars] = useState([]);
+  const [brandName, setBrandName] = useState(""); // State to store brand name
+  const staticCategoryId = '6668257973cd6403d5f164ac'; // Define the static category ID here
 
   useEffect(() => {
     const fetchVehicleData = async () => {
@@ -16,7 +19,8 @@ const SwiftSpecificationTable = () => {
         if (response.data) {
           setVehicleData(response.data);
           setLoading(false);
-          fetchAlternativeCars(response.data.category); // Fetch alternative cars after main car data is fetched
+          fetchAlternativeCars(response.data.category_id, id);
+          fetchBrandName(response.data.brand_id); // Fetch brand name based on brand_id
         }
       } catch (error) {
         console.error('Error fetching vehicle data:', error);
@@ -27,15 +31,34 @@ const SwiftSpecificationTable = () => {
     fetchVehicleData();
   }, [id]);
 
-  const fetchAlternativeCars = async (category) => {
+  const fetchAlternativeCars = async (categoryId, currentVehicleId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/vehicles?category=${category}&limit=4`);
-      
+      const response = await axios.get(`http://localhost:5000/api/vehicles/byCategory/${categoryId}?limit=4`);
       if (response.data) {
-        setAlternativeCars(response.data);
+        const filteredCars = response.data.filter(car => car._id !== currentVehicleId);
+        const carsWithBrandNames = await Promise.all(filteredCars.map(async (car) => {
+          const brand = await fetchBrandName(car.brand_id);
+          return {
+            ...car,
+            brandName: brand
+          };
+        }));
+        setAlternativeCars(carsWithBrandNames);
       }
     } catch (error) {
       console.error('Error fetching alternative cars:', error);
+    }
+  };
+
+  const fetchBrandName = async (brandId) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/brands/${brandId}`);
+      if (response.data) {
+        return response.data.name; // Return brand name
+      }
+    } catch (error) {
+      console.error('Error fetching brand name:', error);
+      return 'Unknown Brand'; // Default value if fetching fails
     }
   };
 
@@ -47,62 +70,56 @@ const SwiftSpecificationTable = () => {
     return <p>Failed to fetch vehicle data.</p>;
   }
 
-  // Function to render transmission types
   const renderTransmissionTypes = () => {
     if (!vehicleData.variants || vehicleData.variants.length === 0) return null;
 
-    // Map transmission codes to full names
     const transmissionTypeMap = {
       A: 'Automatic',
       M: 'Manual',
       AMT: 'Automated Manual Transmission',
       CVT: 'Continuously Variable Transmission',
       DCT: 'Dual-Clutch Transmission'
-      // Add more mappings as needed
     };
 
-    // Get unique transmission types from all variants
     const transmissionTypes = [...new Set(vehicleData.variants.flatMap(variant => variant.transmission_type))];
-    
-    // Map transmission types to their full names
     const transmissionNames = transmissionTypes.map(type => transmissionTypeMap[type] || 'Unknown').join(' / ');
 
     return transmissionNames;
   };
 
-  // Function to render engine sizes
   const renderEngineSize = () => {
     if (!vehicleData || !vehicleData.variants || vehicleData.variants.length === 0) return null;
 
-    // Get all engine sizes from the variants
     const engineSizes = vehicleData.variants.map(variant => variant.engine_size);
-    
-    // Determine the minimum and maximum engine sizes
     const minEngineSize = Math.min(...engineSizes);
     const maxEngineSize = Math.max(...engineSizes);
 
-    return (
-      <h4>
-        {minEngineSize === maxEngineSize ? `${minEngineSize} cc` : `${minEngineSize} - ${maxEngineSize} cc`}
-      </h4>
-    );
+    return minEngineSize === maxEngineSize ? `${minEngineSize} cc` : `${minEngineSize} - ${maxEngineSize} cc`;
   };
 
   const vehicleTypeMap = {
     P: 'Petrol',
     D: 'Diesel',
     E: 'Electric'
-    // Add more mappings as needed
   };
 
   const formatPrice = (price) => {
     if (price >= 10000000) {
-      // If price is 1 crore or more
       return `${(price / 10000000).toFixed(1)} Crore`;
     } else {
-      // If price is less than 1 crore
       return `${(price / 100000).toFixed(1)} Lakh`;
     }
+  };
+
+  const VehicleInfoTable = ({ vehicleData }) => {
+    const prices = vehicleData.variants.map(variant => variant.price);
+    const priceRange = prices[0] === prices[prices.length - 1]
+      ? `${formatPrice(prices[0])}`
+      : `${formatPrice(prices[0])} - ${formatPrice(prices[prices.length - 1])}`;
+
+    return (
+      <TableRow title="Ex-Showroom Price (Delhi)" data={priceRange} />
+    );
   };
 
   return (
@@ -110,8 +127,8 @@ const SwiftSpecificationTable = () => {
       <table>
         <caption>{vehicleData.name} Specification</caption>
         <tbody>
-          <TableRow title="Ex-Showroom Price (Delhi)" data={`${formatPrice(vehicleData.variants[0].price)} - ${formatPrice(vehicleData.variants[vehicleData.variants.length - 1].price)}`} />
-          <TableRow title="Fuel Type" data={vehicleData && vehicleTypeMap[vehicleData.vehicle_type]} />
+          <VehicleInfoTable vehicleData={vehicleData} />
+          <TableRow title="Fuel Type" data={vehicleTypeMap[vehicleData.vehicle_type]} />
           <TableRow title="Transmission Type" data={renderTransmissionTypes()} />
           <TableRow title="Engine Size" data={renderEngineSize()} />
           <TableRow title="Power" data="83 bhp @ 6000 RPM - 74 bhp @ 4000 RPM" />
@@ -140,45 +157,39 @@ const SwiftSpecificationTable = () => {
           <TableRow title="Airbags" data="1 (Driver Only) <br />2 (Driver &amp; Co-Driver)" />
         </tbody>
       </table>
-      <table className="alternative-cars">
-        <caption>Alternatives to {vehicleData.name}</caption>
-        <tbody>
+    <table style={{backgroundColor: "transparent"}}>
+      
+      {alternativeCars.length > 0 && (
+        <>
+        <caption >Alternative Cars</caption>
+        <div style={{ marginTop: '5px' }}>
           {alternativeCars.map((car, index) => (
-            <AlternativeCarRow
-              key={index}
-              imgSrc={`/carsline/assets/cars/${car.image}`}
-              carName={car.name}
-              price={`${formatPrice(car.price)}*`}
-            />
+            <div key={index} style={{ marginBottom: '20px', border: '1px solid #f0f0f0', borderRadius: '5px', textAlign: 'center', padding: '20px', backgroundColor: '#F8F9F9', cursor: 'pointer' }}>
+              <div style={{ height: '60px', width: 'auto' }}>
+                <img src={car.images[0]} alt={`${car.brandName} ${car.name}`} style={{ height: '100%', borderRadius: '10px', filter: 'none' }} />
+              </div>
+              <div style={{ backgroundColor: 'transparent', padding: '10px' }}>
+                <div style={{ fontSize: '16px', fontWeight: '500', marginBottom: '8px' }}>{car.brandName} {car.name}</div>
+                <div style={{ fontSize: '14px', color: '#757575' }}>
+                  <span><i className="fa fa-inr" aria-hidden="true"></i> {`${formatPrice(car.variants[0].price)}*`}</span>
+                </div>
+                <a className='links' href={`/a/cars/${car._id}`} >Check Out More <ArrowRightOutlined /></a>
+              </div>
+            </div>
           ))}
-        </tbody>
+        </div>
+        </>
+      )}
       </table>
     </section>
   );
 };
 
-const TableRow = ({ title, data }) => {
-  return (
-    <tr>
-      <td className="title">{title}</td>
-      <td className="data" dangerouslySetInnerHTML={{ __html: data }} />
-    </tr>
-  );
-};
+const TableRow = ({ title, data }) => (
+  <tr>
+    <td className="title">{title}</td>
+    <td className="data" dangerouslySetInnerHTML={{ __html: data }} />
+  </tr>
+);
 
-const AlternativeCarRow = ({ imgSrc, carName, price }) => {
-  return (
-    <tr>
-      <td><img src={imgSrc} width="120px" alt={carName} /></td>
-      <td>
-        {carName}
-        <br />
-        <span>
-          <i className="fa fa-inr" aria-hidden="true"></i> {price}
-        </span>
-      </td>
-    </tr>
-  );
-};
-
-export default SwiftSpecificationTable;
+export default SpecificationTable;

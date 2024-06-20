@@ -40,17 +40,17 @@ const VarientsTable = () => {
     const maxEngineSize = Math.max(...engineSizes);
 
     return (
-      <h4>
-        {minEngineSize === maxEngineSize ? `${minEngineSize} cc` : `${minEngineSize} - ${maxEngineSize} cc`}
-      </h4>
+      <h6>
+        <ThunderboltOutlined />{minEngineSize === maxEngineSize ? `${minEngineSize} cc` : `${minEngineSize} - ${maxEngineSize} cc`}
+      </h6>
     );
   };
 
   const formatPrice = (price) => {
     if (price >= 10000000) {
-      return `${(price / 10000000).toFixed(1)} Crore`;
+      return `${(price / 10000000).toFixed(2)} Crore`;
     } else {
-      return `${(price / 100000).toFixed(1)} Lakh`;
+      return `${(price / 100000).toFixed(2)} Lakh`;
     }
   };
 
@@ -67,7 +67,7 @@ const VarientsTable = () => {
             <tr key={index}>
               <td className="title">{variant.name}</td>
               <td className="title">
-                <ThunderboltOutlined /> {renderEngineSize()}
+                {renderEngineSize()}
               </td>
               <td className="title">
                 <SettingOutlined /> {variant.transmission_type[0] === 'A' ? 'Auto' : 'Manual'}

@@ -1,14 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import './components/Panel.css'; // Import your CSS file
-import { WrapText } from '@material-ui/icons';
+
+const imageLinks = [
+  "https://tuningwerk.de/wp-content/uploads/2017/01/Slider_Tuningwerk_Firstclass_ENG.jpg",
+  "https://pictures.dealer.com/r/ramseyvolvovcna/1461/5af08d866527751113d6e7ef0aee5691x.jpg?impolicy=resize_crop&w=1600&h=514",
+  "https://s3.amazonaws.com/cka-dash/178-1222-BC234/slider1.jpg",
+  "https://th.bing.com/th/id/R.7e8fbc4d23d9a3e036b9e54ec9852de4?rik=WMOXde%2f2qhpb9A&riu=http%3a%2f%2ftoyotaroxas.com.ph%2fwp-content%2fuploads%2f2019%2f08%2fVehicle-Banners-LandCruiser.jpg&ehk=vASTdvln%2fkvU1iTZ%2fiL3DvUvmwj6S3SBJlkErZRmIVc%3d&risl=&pid=ImgRaw&r=0",
+];
+const imageLinks2 = [
+  "https://th.bing.com/th/id/R.93754d1bc168446ad1af06dd746b30e6?rik=gLmHk%2fZx5hbXfg&riu=http%3a%2f%2fimages.dealersites.cardekho.com%2f1973%2fuploads%2f18749901.jpg&ehk=XIu0jmFoJ%2bLMo8NZTu9j4CWEKDodiJXxx44CWhZ7xfQ%3d&risl=&pid=ImgRaw&r=0",
+  "https://th.bing.com/th/id/R.c08d62e7186bfc3f0e941c7a0d9cf9a8?rik=s11h8eZftVfVBw&riu=http%3a%2f%2fimages.dealersites.cardekho.com%2f2223%2fbanner%2ftigorzi-17401.jpg&ehk=50964OdIAEd%2b9YfHqjyNLLhu7jMYXoBOdLNj%2bfi6AWw%3d&risl=&pid=ImgRaw&r=0",
+  "https://s3-ap-southeast-1.amazonaws.com/assetsin.izmocars.com/b_images/verna-16393-8351.jpg",
+  "https://github.com/nandpalmohit/carsline/blob/main/assets/adv/aura.jpg?raw=true"
+];
 
 const Panel = () => {
   const [activeTab, setActiveTab] = useState(''); // State to manage active tab
   const [categories, setCategories] = useState([]); // State to store categories
-  const [vehicles, setVehicles] = useState([]); // State to store vehicles based on activeTab
+  const [vehicles, setVehicles] = useState([]);
+  const [newvehicles, setNewvehicles] = useState([]); // State to store vehicles based on activeTab
   const [brands, setBrands] = useState([]); // State to store brands
+  const [showMoreBrands, setShowMoreBrands] = useState(false); // State to manage showing more brands
   const [currentCategoryName, setCurrentCategoryName] = useState(''); // State to store current category name
+  const [currentMonth, setCurrentMonth] = useState(''); // State to store current month
+  const currentYear = new Date().getFullYear();
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [fade, setFade] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageLinks.length);
+        setFade(false);
+      }, 1000); // 1 second for fade-out effect
+    }, 5000); // 5000 ms = 5 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +81,24 @@ const Panel = () => {
     }
   };
 
+  const fetchVehicles = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/vehicles');
+      const vehiclesData = await response.json();
+
+      // Get the last 4 cars and reverse them to get in descending order
+      const lastFourVehicles = vehiclesData.slice(-4).reverse();
+
+      setNewvehicles(lastFourVehicles);
+    } catch (error) {
+      console.error('Error fetching vehicles:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchVehicles();
+  }, []);
+
   const formatPrice = (price) => {
     if (price >= 10000000) {
       return `${(price / 10000000).toFixed(1)} Crore`;
@@ -64,30 +113,51 @@ const Panel = () => {
     await fetchVehiclesByCategory(categoryId);
   };
 
+  useEffect(() => {
+    // Function to get current month name
+    const getCurrentMonth = () => {
+      const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      const now = new Date();
+      return months[now.getMonth()];
+    };
+
+    setCurrentMonth(getCurrentMonth());
+  }, []);
+
   return (
     <div style={{ padding: "0px 5%" }}>
       <div className="panel">
-      <div className="panel">
+        <div className="panel" id="brands">
           <h3>Top Brands</h3>
-          <div className="brandcontent" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around", marginTop: "20px" }}>
-            {brands.map(brand => (
+          <div className="brandcontent">
+            {brands.slice(0, showMoreBrands ? brands.length : 12).map(brand => (
               <div className="brand_cards" key={brand._id}>
                 <img src={brand.image} alt={brand.name} />
               </div>
             ))}
-          </div>
-        </div>
-        <h3>New Cars Of 2020</h3>
-        <div className="tabcontent" id="topSellCars">
-          {vehicles.length > 0 ? (
-            vehicles.map(vehicle => (
+          </div><br/>
+          {brands.length > 12 && (
+            <div className="show-more-brands">
+              <button className='links' onClick={() => setShowMoreBrands(!showMoreBrands)}>
+                {showMoreBrands ? 'Show Less' : 'Show More'}
+              </button>
+            </div>
+          )}
+        </div><br/>
+        <h3 id="newCars">New Cars Of {currentYear}</h3>
+        <div className="tabcontent">
+          {newvehicles.length > 0 ? (
+            newvehicles.map(vehicle => (
               <div key={vehicle._id} className="cards">
                 <h5 className="badge">Just Launched</h5>
-                <img src={vehicle.image} alt="" width="100%" />
+                <img src={vehicle.images[0]} alt="" width="100%" style={{objectFit: "contain"}}/>
                 <div className="card-data">
                   <a href={`cars/${vehicle._id}`}>{vehicle.name}</a>
-                  <h4><i className="fa fa-inr" aria-hidden="true"></i> {formatPrice(vehicle.price)} <span>onwards</span></h4>
-                  <span className="card-para">*Ex-showroom price in {vehicle.city}</span>
+                  <h4><i className="fa fa-inr" aria-hidden="true"></i> {formatPrice(vehicle.city_price[0].price)} <span>onwards</span></h4>
+                  <span className="card-para">*Ex-showroom price in {vehicle.city_price[0].name}</span>
                   <a href={`cars/${vehicle._id}`} className="link">Check Out More <ArrowRightOutlined /></a>
                 </div>
               </div>
@@ -97,39 +167,54 @@ const Panel = () => {
           )}
         </div>
         <br/><br/>
-        <div class="adv-cars" style={{ marginTop: 30, padding: '0px 5%' }}>
-        <img src="https://nandpalmohit.github.io/carsline/assets/adv/i20hr.jpg" width="100%" />
+        <div className="adv-cars" style={{ marginTop: 30 }}>
+          <img 
+            src={imageLinks[currentImageIndex]} 
+            width="100%" 
+            alt="Car Advertisement" 
+            className={fade ? "fade-out" : "fade-in"} 
+          />
         </div><br/><br/>
-        <div className="tabs">
-          {categories.map(category => (
-            <button
-              key={category._id}
-              className={`tablink ${activeTab === category._id ? 'active' : ''}`}
-              onClick={() => handleTabClick(category._id, category.name)}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
-        <div className="tabcontent">
-          {vehicles.length > 0 ? (
-            vehicles.map(vehicle => (
-              <div key={vehicle._id} className="cards">
-                <h5 className="badge">99</h5>
-                <img src={vehicle.images[0]} alt={vehicle.name} />
-                <div className="card-data">
-                  <a href={`/cars/${vehicle._id}`}>{brands[vehicle.brand_id]} {vehicle.name}</a>
-                  <h4><i className="fa fa-inr" aria-hidden="true"></i> {formatPrice(vehicle.city_price[0].price)} <span>onwards</span></h4>
-                  <span className="card-para">*Ex-showroom price in {vehicle.city_price[0].name}</span>
-                  <a href={`/cars/${vehicle._id}`} className="link">Check Out More <ArrowRightOutlined /></a>
+        <div className="panel" style={{ borderRadius: "10px", backgroundColor: "#fff", width: "100%", position: "relative", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", marginBottom: "20px" }} id="cars">
+          <h3>All Cars</h3>
+          <div className="tabs">
+            {categories.map(category => (
+              <button
+                key={category._id}
+                className={`tablink ${activeTab === category._id ? 'active' : ''}`}
+                onClick={() => handleTabClick(category._id, category.name)}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
+          <div className="tabcontent">
+            {vehicles.length > 0 ? (
+              vehicles.map(vehicle => (
+                <div key={vehicle._id} className="cards">
+                  <h5 className="badge">{vehicle.engine_size} cc </h5>
+                  <img src={vehicle.images[0]} alt={vehicle.name} style={{ objectFit: "contain" }} />
+                  <div className="card-data">
+                    <a href={`/cars/${vehicle._id}`}>{brands.find(brand => brand._id === vehicle.brand_id)?.name} {vehicle.name}</a>
+                    <h4><i className="fa fa-inr" aria-hidden="true"></i> {formatPrice(vehicle.city_price[0].price)} <span>onwards</span></h4>
+                    <span className="card-para">*Ex-showroom price in {vehicle.city_price[0].name}</span>
+                    <a href={`/cars/${vehicle._id}`} className="link">Check Out More <ArrowRightOutlined /></a>
+                  </div>
                 </div>
-              </div>
-            ))
-          ) : (
-            <p>No vehicles found for {currentCategoryName}</p>
-          )}
+              ))
+            ) : (
+              <p>No vehicles found for {currentCategoryName}</p>
+            )}
+          </div>
+        </div><br/><br/>
+        <div className="adv-cars" style={{ marginTop: 30 }}>
+          <img 
+            src={imageLinks2[currentImageIndex]} 
+            width="100%" 
+            alt="Car Advertisement" 
+            className={fade ? "fade-out" : "fade-in"} 
+          />
         </div>
-        
       </div>
     </div>
   );

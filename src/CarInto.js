@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import axios from 'axios';
+import { Rate, Typography } from 'antd';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './components/Style.css';
@@ -10,20 +11,35 @@ const CarIntro = () => {
   const [vehicle, setVehicle] = useState(null);
   const [brandName, setBrandName] = useState("");
   const { id } = useParams();
+  const [unitsSold, setUnitsSold] = useState(0);
   const vehicleId = id;
-  console.log(id);
+
+  const generateRandomUnitsSold = () => {
+    return Math.floor(1000 + Math.random() * 9000); // Generates a number between 1000 and 9999
+  };
+
+  useEffect(() => {
+    // Load units sold count from localStorage if available
+    const storedUnitsSold = parseInt(localStorage.getItem(`vehicle_${vehicleId}_unitsSold`)) || generateRandomUnitsSold();
+    setUnitsSold(storedUnitsSold);
+  }, [vehicleId]);
+
+  useEffect(() => {
+    // Save units sold count to localStorage whenever it changes
+    localStorage.setItem(`vehicle_${vehicleId}_unitsSold`, unitsSold.toString());
+  }, [unitsSold, vehicleId]);
+
+  useEffect(() => {
+    // Increment units sold count by 500 each time component mounts
+    setUnitsSold(prevUnitsSold => prevUnitsSold + 500);
+  }, []);
 
   useEffect(() => {
     const fetchVehicle = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/vehicles/${id}`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log('Vehicle Data:', data);
-        setVehicle(data);
-        fetchBrandName(data.brand_id);
+        const response = await axios.get(`http://localhost:5000/api/vehicles/${vehicleId}`);
+        setVehicle(response.data);
+        fetchBrandName(response.data.brand_id);
       } catch (error) {
         console.error('Error fetching vehicle:', error);
       }
@@ -33,17 +49,23 @@ const CarIntro = () => {
 
   const fetchBrandName = async (brandId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/brands/${brandId}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log('Brand Data:', data);
-      setBrandName(data.name);
+      const response = await axios.get(`http://localhost:5000/api/brands/${brandId}`);
+      setBrandName(response.data.name);
     } catch (error) {
       console.error('Error fetching brand name:', error);
       setBrandName('Unknown Brand');
     }
+  };
+
+  const formatPriceRange = (prices) => {
+    if (prices.length === 0) return '';
+
+    const minPrice = prices[0];
+    const maxPrice = prices[prices.length - 1];
+
+    return minPrice === maxPrice
+      ? `${formatPrice(minPrice)}`
+      : `${formatPrice(minPrice)} - ${formatPrice(maxPrice)}`;
   };
 
   const formatPrice = (price) => {
@@ -130,6 +152,39 @@ const CarIntro = () => {
     E: 'Electric'
   };
 
+  const RandomRate = () => {
+    const getRandomStarRating = () => {
+      const randomValue = Math.random() * 5;
+      return Math.floor(randomValue * 10) / 10;
+    };
+
+    const getStoredRating = () => {
+      const storedRating = localStorage.getItem(`vehicle_${vehicleId}_rating`);
+      return storedRating ? parseFloat(storedRating) : null;
+    };
+
+    const [rating, setRating] = useState(getStoredRating());
+
+    useEffect(() => {
+      if (rating !== null) {
+        localStorage.setItem(`vehicle_${vehicleId}_rating`, rating.toString());
+      }
+    }, [rating, vehicleId]);
+
+    const generateRating = () => {
+      const newRating = getRandomStarRating();
+      setRating(newRating);
+    };
+
+    if (rating === null) {
+      generateRating();
+    }
+
+    return (
+      <Rate value={rating} disabled allowHalf className="antd-rate" />
+    );
+  };
+
   return (
     <section className="car-banner" id="overview">
       <div className="car-intro">
@@ -138,14 +193,12 @@ const CarIntro = () => {
           <div className="car-body">
             <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>{`${brandName} ${vehicle.name}`}</h1>
             <div className="rating">
-              <span className="fa fa-star checked"></span>
-              <span className="fa fa-star checked"></span>
-              <span className="fa fa-star checked"></span>
-              <span className="fa fa-star"></span>
-              <span className="fa fa-star"></span>
-              <a href="#" title="200 reviews | 78 Ratings">200 reviews | 78 Ratings</a>
+              <RandomRate />
+              <Typography.Text>
+                <a href="#" title="200 reviews | 78 Ratings">200 reviews | 78 Ratings</a>
+              </Typography.Text>
             </div>
-            <h2 className="car-price"><i className="fa fa-inr" aria-hidden="true"></i> <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>₹ {`${formatPrice(vehicle.variants[0].price)} - ${formatPrice(vehicle.variants[vehicle.variants.length - 1].price)}*`}</span></h2>
+            <h2 className="car-price"><i className="fa fa-inr" aria-hidden="true"></i> <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>₹ {vehicle && formatPriceRange(vehicle.variants.map(variant => variant.price))}*</span></h2>
             <span className="car-span">*Ex-Showroom price in Ahmedabad</span>
             <button className="offerBtn" fdprocessedid="hh7t5i">View More Offers</button>
             <span className="selling"><i className="fa fa-superpowers" aria-hidden="true"></i> 18498 Selling in November.</span>
@@ -154,7 +207,7 @@ const CarIntro = () => {
         <div className="car-box">
           <div className="feature-box">
             <img src="https://img.icons8.com/bubbles/60/000000/top-hat.png" alt="feature icon" />
-            <h4>1st Selling</h4>
+            <h4>{unitsSold} Sales</h4>
           </div>
           {renderTransmissionTypes()}
           <div className="feature-box">
@@ -173,8 +226,8 @@ const CarIntro = () => {
           <>
             <h3 className="title">{vehicle.name} Overview</h3>
             <p>{vehicle.overview}</p>
-            <h3 className="title">Swift Specification</h3>
-            <p>India’s favourite hatchback gets a fresh design language that is youthful as well as upmarket. The interiors have been designed with a host of advanced features including a new cockpit design and a sporty steering wheel with cruise and audio controls and a seven-inch Smartplay Studio.</p>
+            <h3 className="title">{vehicle.name} Specification</h3>
+            <p>India’s favourite vehicle gets a fresh design language that is youthful as well as upmarket. The interiors have been designed with a host of advanced features including a new cockpit design and a sporty steering wheel with cruise and audio controls and a seven-inch Smartplay Studio.</p>
           </>
         )}
       </div>
@@ -182,7 +235,8 @@ const CarIntro = () => {
   );
 };
 
-const SampleNextArrow = ({ className, style, onClick }) => {
+const SampleNextArrow = (props) => {
+  const { className, style, onClick } = props;
   return (
     <div
       className={className}
@@ -192,7 +246,8 @@ const SampleNextArrow = ({ className, style, onClick }) => {
   );
 };
 
-const SamplePrevArrow = ({ className, style, onClick }) => {
+const SamplePrevArrow = (props) => {
+  const { className, style, onClick } = props;
   return (
     <div
       className={className}

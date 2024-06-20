@@ -21,11 +21,12 @@ function App() {
       <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="/cars/:id" element={<CheckOut />} />
-        <Route path="/Admin" element={<Login />} />
-        <Route path="/Admin/signup" element={<Signup />} />
-        <Route path="/Admin/forgotpass" element={<ForgotPassword />} />
-        <Route path="/Admin/OTP/:email" element={<ResetPasswordOTP />} />
-        <Route path="/Admin/dashboard" element={<App1 />} />
+      <Route path="/a/cars/:id" element={<CheckOut />} />
+      <Route path="/Admin" element={<Login />} />
+      <Route path="/Admin/signup" element={<Signup />} />
+      <Route path="/Admin/forgotpass" element={<ForgotPassword />} />
+      <Route path="/Admin/OTP/:email" element={<ResetPasswordOTP />} />
+      <Route path="/Admin/dashboard" element={<App1 />} />
       <Route path="/Admin/brand" element={<Brand />} />
       <Route path="/Admin/vehicles" element={<Vehicles />} />
       <Route path="/Admin/customers" element={<Customers />} />

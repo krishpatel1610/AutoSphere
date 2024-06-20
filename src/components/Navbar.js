@@ -35,9 +35,9 @@ const Navbar = () => {
       </nav>
       <nav className={`menu-container ${menuActive ? 'active' : ''}`}>
         <NavLink exact to="/" style={{ color: location.pathname === '/' ? '#5214ae' : 'black' }}>Home</NavLink>
-        <NavLink to="/cars" style={{ color: location.pathname === '/cars' ? '#5214ae' : 'black' }}>Cars</NavLink>
-        <NavLink to="/about" style={{ color: location.pathname === '/about' ? '#5214ae' : 'black' }}>About Us</NavLink>
-        <NavLink to="/contact" style={{ color: location.pathname === '/contact' ? '#5214ae' : 'black' }}>Contact Us</NavLink>
+        <a href="#newCars" style={{ color: location.pathname === '/contact' ? '#5214ae' : 'black' }}>New Arrivals</a>
+        <a href="#brands" style={{ color: location.pathname === '/about' ? '#5214ae' : 'black' }}>Brands</a>
+        <a href="#cars" style={{ color: location.pathname === '/cars' ? '#5214ae' : 'black' }}>Cars</a>
         <a href="/"><i className="fa fa-twitter" aria-hidden="true"></i></a>
       </nav>
     </div>

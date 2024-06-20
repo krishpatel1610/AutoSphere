@@ -160,3 +160,28 @@
 	transition: .5s;
 	line-height: 0px;
 }
+
+.brandcontent{
+	display: grid;
+	grid-template-columns: auto auto minmax(0,300px) auto auto  minmax(0,200px);
+	text-align: center; 
+	grid-gap: 10px;
+}
+.brandcontent .brand_cards{
+	border: 1px solid #f0f0f0;
+	border-radius: 5px;
+	text-align: center;
+	padding: 20px;
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+	background-color: #F8F9F9;
+	cursor: pointer;
+}
+.brandcontent .brand_cards:hover{
+	filter: grayscale(10%);
+	-webkit-filter: grayscale(10%);
+	box-shadow: 2px 2px 2px #e6e6e6;
+}
+.brandcontent .brand_cards img{
+	height: 60px;
+}

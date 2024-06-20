@@ -8,6 +8,8 @@ router.post('/', vehicleController.createVehicle);
 // Get all vehicles
 router.get('/', vehicleController.getVehicles);
 
+router.get('/:id', vehicleController.getVehicleById);
+
 // Get count of cars for each brand
 router.get('/brands/:id/cars', vehicleController.getBrandCarCount);
 

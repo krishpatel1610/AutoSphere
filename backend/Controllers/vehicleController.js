@@ -19,6 +19,20 @@ exports.getVehicles = async (req, res) => {
   }
 };
 
+exports.getVehicleById = async (req, res) => {
+  try {
+    const vehicle = await Vehicle.findById(req.params.id);
+    if (!vehicle) {
+      return res.status(404).json({ message: 'Vehicle not found' });
+    }
+    res.json(vehicle);
+  } catch (error) {
+    console.error('Error fetching vehicle:', error);
+    res.status(500).json({ error: 'Failed to fetch vehicle' });
+  }
+};
+
+
 
 exports.getBrandCarCount = async (req, res) => {
   try {

@@ -147,14 +147,7 @@ footer.content {
     gap: 20px;
   }
   
-  footer.content .data h3,
-  footer.content .link h3,
-  footer.content .service h3,
-  footer.content .detail h3 {
-    color: #333;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
+  
   
   footer.content .data p {
     color: #666;
@@ -174,7 +167,7 @@ footer.content {
   footer.content .link a:hover,
   footer.content .service a:hover,
   footer.content .detail a:hover {
-    color: #21618C;
+    color: #5214ae;
   }
   
   footer.content .copyright {
@@ -188,6 +181,17 @@ footer.content {
   footer.content .copyright span i {
     color: #0fbf9f;
   }
+  footer.content .data h3,
+  footer.content .link h3,
+  footer.content .service h3,
+  footer.content .detail h3 {
+    padding: 15px 20px;
+    font-family: 'Monoton', cursive;
+    font-weight: 600;
+    color: #5214ae;
+    font-size: 22px;
+    cursor: pointer;
+  }
 
 /* Style.css */
 
@@ -195,13 +199,13 @@ footer.content {
 header.banner {
   background: url('https://www.smgtoyotahillcrest.co.za/wp-content/uploads/2023/03/blog_Fortuner2023-870x530.jpg');
   background-attachment: fixed;
-  height: 91vh;
+  height: 100vh;
   background-size: cover;
 }
 
 .banner .title {
   width: 100%;
-  height: 91vh;
+  height: 100vh;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
   background-color: rgba(0, 0, 0, 0.6);

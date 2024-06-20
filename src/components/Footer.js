@@ -1,13 +1,13 @@
 // Footer.js
 
 import React from 'react';
-import './Style.css'; // Import your external CSS file for styling
+import '../components/Checkout.css'; // Import your external CSS file for styling
 
 const Footer = () => {
   return (
     <footer className="content">
       <div className="data">
-        <h3>AutoSphere</h3>
+        <h3  style={{color:'#5214ae'}} >AutoSphere</h3>
         <p>India's /1 and largest portal of auto car vehicle. We give you the <br /> best reviews and rates for your cars.We believe brand interaction <br /> is key in communication. Real innovations and a positive <br /> customer experience are the heart of successful communication.</p>
       </div>
       <div className="link">

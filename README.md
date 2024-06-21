@@ -60,56 +60,60 @@ A comprehensive Team Management System where employees and companies can registe
 
 ## Screenshots
 
-<<<<<<< HEAD
-### Dashboard
-=======
->>>>>>> 52c73f5ffd29faebfa88f1de5ac5e23e197d31ff
-![Dashboard](./screen_shorts/dashboard.png)(./screen_shorts/dashboard_navbar.png)
+### Dashboard (Client)
+![Dashboard](./screen_shorts/dashboard.png)
+
+![Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (Top Brands) 
-![Dashboard](./screenshots/dash2.png)
+![Dashboard](./screen_shorts/Top_brands.png)
 
 ### Dashboard (Latest cars) 
-![Employee Dashboard](./screenshots/dash3.png)
+![Dashboard](./screen_shorts/Latest_cars.png)
 
 ### Dashboard (All cars) 
-![Employee Dashboard](./screenshots/dash4.png)
+![Dashboard](./screen_shorts/All_cars.png)
+![Dashboard](./screen_shorts/all_cars_footer.png)
 
-### Dashboard (Car data) 
-![Employee Dashboard](./screenshots/dash5.png)
+### Car details (Car data and Overview) 
+![Car Details](./screen_shorts/car_details.png)
 
-### Dashboard (Overview and specification) 
-![Employee Dashboard](./screenshots/dash6.png)
+### Car details (Specification) 
+![Car Details](./screen_shorts/car_specification.png)
 
-### Dashboard (varients) 
-![Employee Dashboard](./screenshots/dash7.png)
+### Car details (variants) 
+![Car Details](./screen_shorts/car_variants.png)
 
-### Dashboard (colors) 
-![Employee Dashboard](./screenshots/dash8.png)
+### Car details (colors) 
+![Car Details](./screen_shorts/car_colors.png)
+
+
+### Error Page (Client)
+![Dashboard](./screen_shorts/error_page.png)
 
 ### Admin Dashboard (login)
-![Company Dashboard](./screenshots/admin1.png)
+![Company Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (register)
-![Employee Login](./screenshots/admin2.png)
+![Employee Login](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (forgot password)
-![Company Login](./screenshots/admin3.png)
+![Company Login](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (Analysis)
-![List of Companies 1](./screenshots/admin4.png)
+![List of Companies 1](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (Brands)
-![List of Companies 2](./screenshots/admin5.png)
+![List of Companies 2](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (Add Brand)
-![List of Employees 1](./screenshots/admin6.png)
+![List of Employees 1](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (Cars)
-![List of Employees 2](./screenshots/admin7.png)
+![List of Employees 2](./screen_shorts/dashboard_navbar.png)
 
 ### Error Page
-![Employee Dashboard](./screenshots/admin8.png)
+![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ## Usage
 

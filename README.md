@@ -1,4 +1,4 @@
-# AutoGuide
+# AutoSphere
 A comprehensive Team Management System where employees and companies can register, view each other's details, and get in touch. This responsive web application ensures seamless interaction between job seekers and employers, accessible across various devices including mobile.
 
 ## Table of Contents
@@ -13,7 +13,7 @@ A comprehensive Team Management System where employees and companies can registe
 ## Installation
 1. Clone the repository
     bash
-    git clone https://github.com/adityakhachar/Indian-Car-Portal.git
+    https://github.com/krishpatel1610/AutoSphere.git
     
 2. Navigate to the project directory
     bash
@@ -52,7 +52,7 @@ A comprehensive Team Management System where employees and companies can registe
 
 ## Technologies Used
 
-- **Frontend**:  React, React Router DOM, Redux (for state management), Axios (for HTTP requests), Ant Design (antd) or Material-UI (for UI components)
+- **Frontend**:  React, React Router DOM, Redux (for state management), Ant Design (antd) or Material-UI (for UI components)
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (using Mongoose)
 - **Authentication**: JSON Web Tokens (JWT), bcrypt (for password hashing)

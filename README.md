@@ -145,15 +145,14 @@ A comprehensive Team Management System where employees and companies can registe
 
 ### Admin Dashboard (Search Vehicle by Category name)
 
-![Admin Vehicles Search](./screen_shorts/s1.png)
+![Admin Vehicles Search](./screen_shorts/s4.png)
 
-![Admin Vehicles Search](./screen_shorts/s3.png)
+![Admin Vehicles Search](./screen_shorts/s5.png)
 
 ### Admin Dashboard (Search Vehicle by Brand and Category)
 
 ![Admin Vehicles Search](./screen_shorts/s2.png)
 
-![Admin Vehicles Search](./screen_shorts/s3.png)
 
 ### Error Page (Admin)
 

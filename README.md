@@ -60,7 +60,9 @@ A comprehensive Team Management System where employees and companies can registe
 
 ## Screenshots
 
+### Dashboard (Client)
 ![Dashboard](./screen_shorts/dashboard.png)
+
 ![Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (Top Brands) 

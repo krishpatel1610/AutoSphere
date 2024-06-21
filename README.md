@@ -92,28 +92,74 @@ A comprehensive Team Management System where employees and companies can registe
 ![Dashboard](./screen_shorts/error_page.png)
 
 ### Admin Dashboard (login)
-![Company Dashboard](./screen_shorts/dashboard_navbar.png)
+![Company Dashboard](./screen_shorts/Admin_login.png)
 
 ### Admin Dashboard (register)
-![Employee Login](./screen_shorts/dashboard_navbar.png)
+![Employee Login](./screen_shorts/Admin_Signup.png)
 
 ### Admin Dashboard (forgot password)
-![Company Login](./screen_shorts/dashboard_navbar.png)
+![Forgot Password](./screen_shorts/fp1.png)
+
+![Forgot Password](./screen_shorts/fp2.png)
+
+![Forgot Password](./screen_shorts/fp3.png)
+
+![Forgot Password](./screen_shorts/fp4.png)
+
+![Forgot Password](./screen_shorts/fp5.png)
+
+![Forgot Password](./screen_shorts/fp6.png)
 
 ### Admin Dashboard (Analysis)
-![List of Companies 1](./screen_shorts/dashboard_navbar.png)
+![Admin Dashboard](./screen_shorts/Admin_dashboard.png)
 
 ### Admin Dashboard (Brands)
-![List of Companies 2](./screen_shorts/dashboard_navbar.png)
+![Admin Brands](./screen_shorts/Admin_brands1.png)
+
 
 ### Admin Dashboard (Add Brand)
-![List of Employees 1](./screen_shorts/dashboard_navbar.png)
 
-### Admin Dashboard (Cars)
-![List of Employees 2](./screen_shorts/dashboard_navbar.png)
+![Admin Brands](./screen_shorts/Admin_brands2.png)
 
-### Error Page
-![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
+![Admin Brands](./screen_shorts/Admin_brands3.png)
+
+![Admin Brands](./screen_shorts/Admin_brands4.png)
+
+### Admin Dashboard (Vehicle Data)
+
+![Admin Vehicles Data](./screen_shorts/Admin_Vehicles1.png)
+
+### Admin Dashboard (Add New Vehicle)
+
+![Admin Vehicles Data](./screen_shorts/Admin_Vehicles2.png)
+
+![Admin Vehicles Data](./screen_shorts/Admin_Vehicles3.png)
+
+![Admin Vehicles Data](./screen_shorts/Admin_Vehicles4.png)
+
+### Admin Dashboard (Search Vehicle by Brand name)
+
+![Admin Vehicles Search](./screen_shorts/s1.png)
+
+![Admin Vehicles Search](./screen_shorts/s3.png)
+
+### Admin Dashboard (Search Vehicle by Category name)
+
+![Admin Vehicles Search](./screen_shorts/s1.png)
+
+![Admin Vehicles Search](./screen_shorts/s3.png)
+
+### Admin Dashboard (Search Vehicle by Brand and Category)
+
+![Admin Vehicles Search](./screen_shorts/s2.png)
+
+![Admin Vehicles Search](./screen_shorts/s3.png)
+
+### Error Page (Admin)
+
+![Employee Error Page](./screen_shorts/Admin_error_page1.png)
+
+![Employee Error Page](./screen_shorts/Admin_error_page2.png)
 
 ## Usage
 

@@ -66,25 +66,26 @@ A comprehensive Team Management System where employees and companies can registe
 ![Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (Top Brands) 
-![Dashboard](./screen_shorts/dashboard_navbar.png)
+![Dashboard](./screen_shorts/Top_brands.png)
 
 ### Dashboard (Latest cars) 
-![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
+![Employee Dashboard](./screen_shorts/Latest_cars.png)
 
 ### Dashboard (All cars) 
-![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
+![Employee Dashboard](./screen_shorts/All_cars.png)
+![Employee Dashboard](./screen_shorts/all_cars_footer.png)
 
-### Dashboard (Car data) 
-![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
+### Dashboard (Car data and Overview) 
+![Employee Dashboard](./screen_shorts/car_details.png)
 
-### Dashboard (Overview and specification) 
-![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
+### Dashboard (Specification) 
+![Employee Dashboard](./screen_shorts/car_specification.png)
 
-### Dashboard (varients) 
-![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
+### Dashboard (variants) 
+![Employee Dashboard](./screen_shorts/car_variants.png)
 
 ### Dashboard (colors) 
-![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
+![Employee Dashboard](./screen_shorts/car_colors.png)
 
 ### Admin Dashboard (login)
 ![Company Dashboard](./screen_shorts/dashboard_navbar.png)

@@ -66,49 +66,49 @@ A comprehensive Team Management System where employees and companies can registe
 ![Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (Top Brands) 
-![Dashboard](./screenshots/dash2.png)
+![Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (Latest cars) 
-![Employee Dashboard](./screenshots/dash3.png)
+![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (All cars) 
-![Employee Dashboard](./screenshots/dash4.png)
+![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (Car data) 
-![Employee Dashboard](./screenshots/dash5.png)
+![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (Overview and specification) 
-![Employee Dashboard](./screenshots/dash6.png)
+![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (varients) 
-![Employee Dashboard](./screenshots/dash7.png)
+![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Dashboard (colors) 
-![Employee Dashboard](./screenshots/dash8.png)
+![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (login)
-![Company Dashboard](./screenshots/admin1.png)
+![Company Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (register)
-![Employee Login](./screenshots/admin2.png)
+![Employee Login](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (forgot password)
-![Company Login](./screenshots/admin3.png)
+![Company Login](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (Analysis)
-![List of Companies 1](./screenshots/admin4.png)
+![List of Companies 1](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (Brands)
-![List of Companies 2](./screenshots/admin5.png)
+![List of Companies 2](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (Add Brand)
-![List of Employees 1](./screenshots/admin6.png)
+![List of Employees 1](./screen_shorts/dashboard_navbar.png)
 
 ### Admin Dashboard (Cars)
-![List of Employees 2](./screenshots/admin7.png)
+![List of Employees 2](./screen_shorts/dashboard_navbar.png)
 
 ### Error Page
-![Employee Dashboard](./screenshots/admin8.png)
+![Employee Dashboard](./screen_shorts/dashboard_navbar.png)
 
 ## Usage
 

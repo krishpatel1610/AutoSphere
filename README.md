@@ -75,6 +75,9 @@ A comprehensive Team Management System where employees and companies can registe
 ![Dashboard](./screen_shorts/All_cars.png)
 ![Dashboard](./screen_shorts/all_cars_footer.png)
 
+### Dashboard (Search Car by Brand or Car Name) 
+![Dashboard](./screen_shorts/car_searching.png)
+
 ### Car details (Car data and Overview) 
 ![Car Details](./screen_shorts/car_details.png)
 

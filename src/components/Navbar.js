@@ -1,32 +1,54 @@
 import React, { useState } from 'react';
-import {
-  MenuOutlined, 
-  SearchOutlined
-} from "@ant-design/icons";
-import { NavLink, useLocation } from "react-router-dom"; // Import NavLink and useLocation from React Router
-import './Style.css'; // Import the external CSS file
+import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
+import './Style.css';
 
 const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
-  const location = useLocation(); // Get the current location using useLocation()
+  const [searchQuery, setSearchQuery] = useState('');
+  const location = useLocation();
+  const history = useNavigate(); // Use useHistory hook here
 
   const toggleMenu = () => {
     setMenuActive(!menuActive);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    navigateTo('/#cars');
+    localStorage.setItem('searchQuery', searchQuery);
+    console.log(localStorage.getItem('searchQuery'));
+    window.location.reload();
+  };
+
+  const navigateTo = (path) => {
+    history(path);
+  };
+
   return (
     <div>
       <nav className="navbar-container">
-        <h3 onClick={() => window.location.href = '/'} style={{ color:'#5214ae' }}>AutoSphere</h3>
+        <h3 onClick={() => navigateTo('/')} style={{ color:'#5214ae' }}>AutoSphere</h3>
         <div className="search-container" style={{marginTop:"auto",marginBottom:"auto"}}>
           <input
             type="search"
             name="searchCars"
             placeholder="Search Your Cars"
             className="searchInp"
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
-          <button type="button" className="searchBtn" style={{ backgroundColor:'#5214ae' }}>
-            <SearchOutlined style={{ fontSize: "18px", color: "black" }} />
+          <button 
+            type="button" 
+            className="searchBtn" 
+            style={{ backgroundColor:'#5214ae' }}
+            onClick={handleSearchSubmit}
+          >
+            <SearchOutlined style={{ fontSize: "18px", color: "white" }} />
           </button>
         </div>
         <button type="button" className="menu-button" onClick={toggleMenu}>

@@ -7,6 +7,7 @@ import CarIntro from "./CarInto";
 import CarColors from "./CarColors";
 import VarientTable from "./VarientTable";
 import SwiftSpecificationTable from "./SpecificationTable";
+import { Link, useParams } from "react-router-dom";
 
 const { Content, Footer } = Layout;
 
@@ -24,6 +25,9 @@ const CheckOut = () => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fade, setFade] = useState(false);
+  const [vehicleName, setVehicleName] = useState('');
+  const { id } = useParams(); // Get vehicleId from URL params
+  const vehicleId = id;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,6 +41,24 @@ const CheckOut = () => {
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
 
+  useEffect(() => {
+    const fetchVehicle = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/vehicles/${vehicleId}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log('Vehicle Data:', data.name); // Debugging: Log vehicle data
+        setVehicleName(data.name);
+        // fetchBrandName(data.brand_id); // Fetch brand name once vehicle data is fetched
+      } catch (error) {
+        console.error('Error fetching vehicle:', error);
+      }
+    };
+    fetchVehicle();
+  }, [vehicleId]);
+
   return (
     <Layout>
       <div style={{ backgroundColor: "transparent", padding: 0 }}>
@@ -44,9 +66,14 @@ const CheckOut = () => {
       </div>
 
       <Content style={{ padding: "0 48px" }}>
-        <Breadcrumb style={{ margin: "16px 0", textAlign: "center" }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>Car</Breadcrumb.Item>
+        <Breadcrumb style={{ margin: '16px 0', textAlign: 'center' }}>
+          <Breadcrumb.Item>
+            <Link to="/" style={{textDecoration:"none"}}>Home</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+          <Link to="/#cars" style={{textDecoration:"none"}}>All Car</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>{vehicleName}</Breadcrumb.Item>
         </Breadcrumb>
 
         <div style={{ textAlign: "center", marginBottom: 16 }}>

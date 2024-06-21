@@ -197,15 +197,15 @@ footer.content {
 
 /* Header */
 header.banner {
-  background: url('https://www.smgtoyotahillcrest.co.za/wp-content/uploads/2023/03/blog_Fortuner2023-870x530.jpg');
+  background: url('https://wallpapercave.com/wp/wp12102485.jpg');
   background-attachment: fixed;
-  height: 100vh;
+  height: 92vh;
   background-size: cover;
 }
 
 .banner .title {
   width: 100%;
-  height: 100vh;
+  height: 92vh;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
   background-color: rgba(0, 0, 0, 0.6);

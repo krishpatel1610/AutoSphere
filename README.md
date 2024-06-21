@@ -1,70 +1,159 @@
-# Getting Started with Create React App
+# AutoGuide
+A comprehensive Team Management System where employees and companies can register, view each other's details, and get in touch. This responsive web application ensures seamless interaction between job seekers and employers, accessible across various devices including mobile.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Available Scripts
+## Installation
+1. Clone the repository
+    bash
+    git clone https://github.com/adityakhachar/Indian-Car-Portal.git
+    
+2. Navigate to the project directory
+    bash
+    cd backend
+    
+3. Install dependencies
+    bash
+    npm install
+    
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### Redux Use
+- **State Management**:  Utilized Redux for centralized state management across components, handling actions like fetching, adding, and deleting entities such as brands and vehicles. 
+- **Async Actions**:  Implemented Redux Thunks for asynchronous operations, integrating with React Router for seamless navigation upon successful actions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Admin Authentication
+- **Forgot Password**: Admin can reset the password  by getting reset link via registered email id. 
+- **Login**: Secure login for Admin.
 
-### `npm test`
+### Admin Functionality
+- **Analysis**: Admin can analysis of cars with their brand.
+- **Brand creation**: Admin can create new Brand or Delte the brand and View.
+- **Vehicle creation**: Can also create new vehicle with their respective brand and also can delete.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### User Functionality
+- **Car Browsing**: User can browse the car based on Brands or Vehicle category.
+- **Suggestions**: User getting Alternative car suggestion based on their category of selected car.
+- **Color Options**: User can see list of available color in car and also change the color of vehicle.
+- **Price**: User can see Citywise price of vehicle.
 
-### `npm run build`
+### Security
+- **Token-Based Authentication**: Secure token-based authentication for user sessions.
+- **Data Privacy**: Ensuring data privacy and security for all user information.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Frontend**:  React, React Router DOM, Redux (for state management), Axios (for HTTP requests), Ant Design (antd) or Material-UI (for UI components)
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB (using Mongoose)
+- **Authentication**: JSON Web Tokens (JWT), bcrypt (for password hashing)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Screenshots
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Dashboard
+![Dashboard](./screenshots/dash1.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Dashboard (Top Brands) 
+![Dashboard](./screenshots/dash2.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Dashboard (Latest cars) 
+![Employee Dashboard](./screenshots/dash3.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Dashboard (All cars) 
+![Employee Dashboard](./screenshots/dash4.png)
 
-## Learn More
+### Dashboard (Car data) 
+![Employee Dashboard](./screenshots/dash5.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Dashboard (Overview and specification) 
+![Employee Dashboard](./screenshots/dash6.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Dashboard (varients) 
+![Employee Dashboard](./screenshots/dash7.png)
 
-### Code Splitting
+### Dashboard (colors) 
+![Employee Dashboard](./screenshots/dash8.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Admin Dashboard (login)
+![Company Dashboard](./screenshots/admin1.png)
 
-### Analyzing the Bundle Size
+### Admin Dashboard (register)
+![Employee Login](./screenshots/admin2.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Admin Dashboard (forgot password)
+![Company Login](./screenshots/admin3.png)
 
-### Making a Progressive Web App
+### Admin Dashboard (Analysis)
+![List of Companies 1](./screenshots/admin4.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Admin Dashboard (Brands)
+![List of Companies 2](./screenshots/admin5.png)
 
-### Advanced Configuration
+### Admin Dashboard (Add Brand)
+![List of Employees 1](./screenshots/admin6.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Admin Dashboard (Cars)
+![List of Employees 2](./screenshots/admin7.png)
 
-### Deployment
+### Error Page
+![Employee Dashboard](./screenshots/admin8.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Usage
 
-### `npm run build` fails to minify
+To get the project up and running, follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Starting the Frontend
+
+
+1. Install the necessary dependencies:
+    bash
+    npm install
+    
+
+2. Start the frontend development server:
+    bash
+    npm start
+    
+    This will launch the frontend on `http://localhost:3000`.
+
+### Starting the Backend
+
+1. Navigate to the backend directory (if it's in a different folder, adjust the path accordingly):
+    bash
+    cd backend
+    
+
+2. Install the necessary backend dependencies:
+    bash
+    npm install
+    
+
+3. Start the backend server:
+    bash
+    node index.js
+    
+    This will launch the backend server on `http://localhost:5000`.
+
+### Accessing the Application
+
+Once both the frontend and backend servers are running, you can access the application by navigating to `http://localhost:3000` in your web browser.
+
+### Additional Notes
+
+- Ensure that you have https://nodejs.org/ installed on your machine.
+- The backend server must be running for the frontend application to communicate with it.
+- If you encounter any issues, check the console for error messages and ensure all dependencies are correctly installed.
+
+
+## Contributing
+...

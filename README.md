@@ -69,23 +69,27 @@ A comprehensive Team Management System where employees and companies can registe
 ![Dashboard](./screen_shorts/Top_brands.png)
 
 ### Dashboard (Latest cars) 
-![Employee Dashboard](./screen_shorts/Latest_cars.png)
+![Dashboard](./screen_shorts/Latest_cars.png)
 
 ### Dashboard (All cars) 
-![Employee Dashboard](./screen_shorts/All_cars.png)
-![Employee Dashboard](./screen_shorts/all_cars_footer.png)
+![Dashboard](./screen_shorts/All_cars.png)
+![Dashboard](./screen_shorts/all_cars_footer.png)
 
-### Dashboard (Car data and Overview) 
-![Employee Dashboard](./screen_shorts/car_details.png)
+### Car details (Car data and Overview) 
+![Car Details](./screen_shorts/car_details.png)
 
-### Dashboard (Specification) 
-![Employee Dashboard](./screen_shorts/car_specification.png)
+### Car details (Specification) 
+![Car Details](./screen_shorts/car_specification.png)
 
-### Dashboard (variants) 
-![Employee Dashboard](./screen_shorts/car_variants.png)
+### Car details (variants) 
+![Car Details](./screen_shorts/car_variants.png)
 
-### Dashboard (colors) 
-![Employee Dashboard](./screen_shorts/car_colors.png)
+### Car details (colors) 
+![Car Details](./screen_shorts/car_colors.png)
+
+
+### Error Page (Client)
+![Dashboard](./screen_shorts/error_page.png)
 
 ### Admin Dashboard (login)
 ![Company Dashboard](./screen_shorts/dashboard_navbar.png)

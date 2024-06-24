@@ -23,26 +23,37 @@ A comprehensive Team Management System where employees and companies can registe
 
 ## Installation
 1. installation command for each of the mentioned libraries and frameworks:
-   1) React:
-        bash
-        npm install react react-dom
-        
-   2) React Router DOM:
-        bash
-        npm install react-router-dom
-   3) Ant Design:
-        bash
-        npm install antd
-   4) Material-UI (Now known as MUI):
-        bash
-        npm install @mui/material @emotion/react @emotion/styled
-   5) MongoDB (For interacting with MongoDB, you typically use the mongodb package):
-        bash
-        npm install mongodb
-   6) Express:
-        bash
-        npm install express
-    
+  To install the necessary libraries and frameworks, use the following commands:
+
+1. **React**:
+    ```bash
+    npm install react react-dom
+    ```
+
+2. **React Router DOM**:
+    ```bash
+    npm install react-router-dom
+    ```
+
+3. **Ant Design**:
+    ```bash
+    npm install antd
+    ```
+
+4. **Material-UI (Now known as MUI)**:
+    ```bash
+    npm install @mui/material @emotion/react @emotion/styled
+    ```
+
+5. **MongoDB (For interacting with MongoDB, you typically use the mongodb package)**:
+    ```bash
+    npm install mongodb
+    ```
+
+6. **Express**:
+    ```bash
+    npm install express
+    ```    
 1. Clone the repository
     bash
     https://github.com/krishpatel1610/AutoSphere.git

@@ -2,6 +2,7 @@
 A comprehensive Team Management System where employees and companies can register, view each other's details, and get in touch. This responsive web application ensures seamless interaction between job seekers and employers, accessible across various devices including mobile.
 
 ## Table of Contents
+- [Requirements](#Requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)

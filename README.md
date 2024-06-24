@@ -21,6 +21,27 @@ A comprehensive Team Management System where employees and companies can registe
 - Express
 
 ## Installation
+1. installation command for each of the mentioned libraries and frameworks:
+    React:
+        bash
+        npm install react react-dom
+        
+    React Router DOM:
+        bash
+        npm install react-router-dom
+    Ant Design:
+        bash
+        npm install antd
+    Material-UI (Now known as MUI):
+        bash
+        npm install @mui/material @emotion/react @emotion/styled
+    MongoDB (For interacting with MongoDB, you typically use the mongodb package):
+        bash
+        npm install mongodb
+    Express:
+        bash
+        npm install express
+    
 1. Clone the repository
     bash
     https://github.com/krishpatel1610/AutoSphere.git

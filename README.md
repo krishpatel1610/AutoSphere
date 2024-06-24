@@ -42,6 +42,7 @@ A comprehensive Team Management System where employees and companies can registe
 
 ### User Functionality
 - **Car Browsing**: User can browse the car based on Brands or Vehicle category.
+- **Searching**: User can search car by its brand name or specific model name.
 - **Suggestions**: User getting Alternative car suggestion based on their category of selected car.
 - **Color Options**: User can see list of available color in car and also change the color of vehicle.
 - **Price**: User can see Citywise price of vehicle.

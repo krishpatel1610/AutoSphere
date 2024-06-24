@@ -10,6 +10,16 @@ A comprehensive Team Management System where employees and companies can registe
 - [Contributing](#contributing)
 - [License](#license)
 
+## Requirements
+
+- React
+- React Router DOM
+- Ant Design
+- Material-UI
+- Mongo DB
+- Node
+- Express
+
 ## Installation
 1. Clone the repository
     bash

@@ -23,23 +23,23 @@ A comprehensive Team Management System where employees and companies can registe
 
 ## Installation
 1. installation command for each of the mentioned libraries and frameworks:
-    React:
+   1) React:
         bash
         npm install react react-dom
         
-    React Router DOM:
+   2) React Router DOM:
         bash
         npm install react-router-dom
-    Ant Design:
+   3) Ant Design:
         bash
         npm install antd
-    Material-UI (Now known as MUI):
+   4) Material-UI (Now known as MUI):
         bash
         npm install @mui/material @emotion/react @emotion/styled
-    MongoDB (For interacting with MongoDB, you typically use the mongodb package):
+   5) MongoDB (For interacting with MongoDB, you typically use the mongodb package):
         bash
         npm install mongodb
-    Express:
+   6) Express:
         bash
         npm install express
     

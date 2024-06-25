@@ -1,6 +1,6 @@
 // Import necessary dependencies
 import React, { useState } from "react";
-import { Button, TextField, Typography } from "@material-ui/core";
+import { Button, TextField, Typography } from "@mui/material";
 import CloudUploadIcon from '@material-ui/CloudUpload';
 import AppFooter from "../../Components/AppFooter";
 import SideMenu from "../../Components/SideMenu";

@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // synthetic event read once
-    const response = await fetch("http://localhost:5000/api/loginAdmin", {
+    const response = await fetch("https://autospherebackend.onrender.com/api/loginAdmin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const Login = () => {
       console.log("Using authToken:", authToken);
 
       const response = await fetch(
-        "http://localhost:5000/api/Admin/auth/protected-route",
+        "https://autospherebackend.onrender.com/api/Admin/auth/protected-route",
         {
           method: "GET",
           headers: {

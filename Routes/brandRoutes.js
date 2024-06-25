@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const brandController = require('../controllers/brandController');
+const brandController = require('../Controllers/brandController');
 
 // Create a new brand
 router.post('/', brandController.createBrand);

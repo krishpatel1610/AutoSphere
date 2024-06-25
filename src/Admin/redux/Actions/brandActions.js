@@ -61,12 +61,12 @@ export const fetchBrands = () => {
     dispatch(fetchBrandsRequest()); // Dispatch the request action
 
     try {
-      const response = await fetch("http://localhost:5000/api/brands");
+      const response = await fetch("https://autospherebackend.onrender.com/api/brands");
       const data = await response.json(); // Parse the response data
 
       // Fetch car count for each brand
       const brandsWithCarCount = await Promise.all(data.map(async (brand) => {
-        const carCountResponse = await fetch(`http://localhost:5000/api/vehicles/brands/${brand._id}/cars`, {
+        const carCountResponse = await fetch(`https://autospherebackend.onrender.com/api/vehicles/brands/${brand._id}/cars`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ export const addBrand = (brandData) => {
         console.log(brandData);
         const payload = { name, image }; // Ensure payload contains name and image
   
-        const response = await fetch("http://localhost:5000/api/brands", {
+        const response = await fetch("https://autospherebackend.onrender.com/api/brands", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'
@@ -129,7 +129,7 @@ export const deleteBrand = (brandId) => {
     dispatch(deleteBrandRequest()); // Dispatch the request action
 
     try {
-      const response = await fetch(`http://localhost:5000/api/brands/${brandId}`, {
+      const response = await fetch(`https://autospherebackend.onrender.com/api/brands/${brandId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

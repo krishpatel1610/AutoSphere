@@ -230,6 +230,7 @@
   .adv-cars img.fade-in {
 	opacity: 1;
   }
+
 @media only screen and (max-width: 1200px) {
   .panel .tabs {
     overflow-x: auto; /* Enable horizontal scrolling for tabs */
@@ -241,11 +242,37 @@
     margin: 0px 10px;
     font-size: 14px;
   }
+
+  .panel .tabcontent {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust card grid for medium screens */
+    gap: 15px;
+  }
+
+  .panel .tabcontent .cards img {
+    height: 150px; /* Adjust card image height */
+  }
+
+  .panel .tabcontent .cards .card-data a {
+    font-size: 16px; /* Adjust font size for card links */
+  }
 }
 
 @media only screen and (max-width: 992px) {
   .panel .tabs button.tablink {
-    padding: 8px 15px; /* Adjust padding for smaller screens */
+    padding: 8px 15px; /* Further adjust padding for smaller screens */
+  }
+
+  .panel .tabcontent {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust card grid for smaller screens */
+    gap: 10px;
+  }
+
+  .panel .tabcontent .cards img {
+    height: 130px; /* Adjust card image height */
+  }
+
+  .panel .tabcontent .cards .card-data a {
+    font-size: 14px; /* Further adjust font size for card links */
   }
 }
 
@@ -253,5 +280,22 @@
   .panel .tabs button.tablink {
     padding: 8px 10px; /* Further adjust padding for extra small screens */
   }
+
+  .panel .tabcontent {
+    grid-template-columns: 1fr; /* Display one card per row on extra small screens */
+    gap: 10px;
+  }
+
+  .panel .tabcontent .cards img {
+    height: 180px; /* Adjust card image height */
+  }
+
+  .panel .tabcontent .cards .card-data a {
+    font-size: 12px; /* Adjust font size for card links */
+  }
+
+  .brandcontent {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjust brand card grid for extra small screens */
+    gap: 5px;
+  }
 }
- 

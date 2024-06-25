@@ -98,7 +98,7 @@ export const fetchCategoriesFailure = (error) => ({
 
 // Function to fetch vehicles
 const getVehicles = () => {
-  return fetch("http://localhost:5000/api/vehicles")
+  return fetch("https://autospherebackend.onrender.com/api/vehicles")
     .then((res) => {
       if (!res.ok) {
         throw new Error('Failed to fetch vehicles');
@@ -123,7 +123,7 @@ export const fetchVehicles = () => {
 
 // Function to fetch brands
 const getBrands = () => {
-  return fetch("http://localhost:5000/api/brands")
+  return fetch("https://autospherebackend.onrender.com/api/brands")
     .then((res) => {
       if (!res.ok) {
         throw new Error('Failed to fetch brands');
@@ -148,7 +148,7 @@ export const fetchBrands = () => {
 
 // Function to fetch categories
 const getCategories = () => {
-  return fetch("http://localhost:5000/api/categories")
+  return fetch("https://autospherebackend.onrender.com/api/categories")
     .then((res) => {
       if (!res.ok) {
         throw new Error('Failed to fetch categories');
@@ -233,7 +233,7 @@ export const addVehicle = (vehicleData) => {
       // Log payload for debugging
       console.log("Payload to be sent:", payload);
 
-      const response = await fetch("http://localhost:5000/api/vehicles", {
+      const response = await fetch("https://autospherebackend.onrender.com/api/vehicles", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -268,7 +268,7 @@ export const addBrand = (brandData) => {
       const { name, logoLink } = brandData;
       const payload = { name, logo: logoLink };
 
-      const response = await fetch("http://localhost:5000/api/brands", {
+      const response = await fetch("https://autospherebackend.onrender.com/api/brands", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

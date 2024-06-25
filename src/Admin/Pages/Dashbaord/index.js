@@ -268,7 +268,7 @@ function RecentOrders() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/api/brands")
+    fetch("https://autospherebackend.onrender.com/api/brands")
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -360,7 +360,7 @@ function DashboardChart() {
       const brandIds = brandsData.map((brand) => brand._id);
 
       const fetchCarCounts = brandIds.map((brandId) =>
-        fetch(`http://localhost:5000/api/vehicles/brands/${brandId}/cars`)
+        fetch(`https://autospherebackend.onrender.com/api/vehicles/brands/${brandId}/cars`)
           .then((response) => {
             if (!response.ok) {
               throw new Error(`HTTP error! Status: ${response.status}`);

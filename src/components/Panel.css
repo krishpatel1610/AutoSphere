@@ -299,7 +299,7 @@
     gap: 5px;
   }
 .brandcontent .brand_cards img {
-    max-height: 40px; /* Adjust image size for smaller screens */
+    max-height: 20px; /* Adjust image size for smaller screens */
   }
 
 }

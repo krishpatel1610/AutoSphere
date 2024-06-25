@@ -9,7 +9,7 @@ export const VERIFY_OTP_REQUEST = 'VERIFY_OTP_REQUEST';
 export const VERIFY_OTP_SUCCESS = 'VERIFY_OTP_SUCCESS';
 export const VERIFY_OTP_FAILURE = 'VERIFY_OTP_FAILURE';
 
-const API_BASE_URL = 'http://localhost:5000/api/'; // Replace with your actual backend URL
+const API_BASE_URL = 'https://autospherebackend.onrender.com/api/'; // Replace with your actual backend URL
 
 export const sendOTPRequest = () => ({
   type: SEND_OTP_REQUEST,

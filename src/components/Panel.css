@@ -232,22 +232,26 @@
   }
   @media only screen and (max-width: 1200px) {
   .panel .tabcontent {
-    grid-template-columns: repeat(3, 1fr); /* Display three cards per row on medium screens */
+    grid-template-columns: repeat(3, 1fr);
+    /* Display three cards per row on medium screens */
   }
 }
 
 @media only screen and (max-width: 992px) {
   .panel .tabcontent {
-    grid-template-columns: repeat(2, 1fr); /* Display two cards per row on small screens */
+    grid-template-columns: repeat(2, 1fr);
+    /* Display two cards per row on small screens */
   }
 }
 
 @media only screen and (max-width: 576px) {
   .panel .tabcontent {
-    grid-template-columns: 1fr; /* Display one card per row on extra small screens */
+    grid-template-columns: 1fr;
+    /* Display one card per row on extra small screens */
   }
 
   .brandcontent {
-    grid-template-columns: repeat(3, 1fr); /* Display three columns of brands per row on extra small screens */
+    grid-template-columns: repeat(3, 1fr);
+    /* Display three columns of brands per row on extra small screens */
   }
 }

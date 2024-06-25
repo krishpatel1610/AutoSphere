@@ -1,48 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Button, Result } from "antd";
+import { Navigate } from "react-router-dom";
 import "./App.css";
 import AppFooter from "./Components/AppFooter";
 import AppHeader from "./Components/AppHeader";
 import SideMenu from "./Components/SideMenu";
 import Dashboard from "../Admin/Pages/Dashbaord";
+import { Button, Result } from "antd";
 
 function App1() {
   const [authToken, setAuthToken] = useState(localStorage.getItem("authToken"));
-  const [isCompatible, setIsCompatible] = useState(window.innerWidth > 576);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsCompatible(window.innerWidth > 576);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Check initial window size
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     if (!storedToken) {
+      // Handle unauthorized access here, for example navigate to /Admin/login or display an error message
       console.log("Unauthorized access detected.");
+      // Example: Navigate to /Admin/login
+      // navigate("/Admin/login"); // Ensure to import navigate from react-router-dom
     }
   }, []);
-
-  if (!isCompatible) {
-    return (
-      <div className="error-container">
-        <Result
-          status="403"
-          title="Device Not Compatible"
-          subTitle="Sorry, your device is not compatible to access Admin functionality. Please use a PC."
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="app-container">
@@ -51,7 +27,7 @@ function App1() {
           <AppHeader />
           <div className="SideMenuAndPageContent">
             <SideMenu />
-            <div className="dashboard-container" style={{ margin: "auto" }}>
+            <div className="dashboard-container" style={{margin:"auto"}}>
               <Dashboard />
             </div>
           </div>
@@ -64,7 +40,7 @@ function App1() {
             title="403"
             subTitle="Sorry, you are not authorized to access this page."
             extra={
-              <Button type="primary" href="/Admin" style={{ textDecoration: "none" }}>
+              <Button type="primary" href="/Admin" style={{textDecoration:"none"}}>
                 Back to Login
               </Button>
             }

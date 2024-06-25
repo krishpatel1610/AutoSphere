@@ -356,4 +356,65 @@ header.banner {
     padding: 6px 12px; /* Adjust button padding */
     font-size: 12px; /* Adjust font size */
   }
+     .navbar-container {
+    height: auto; /* Allow the navbar to adjust its height based on content */
+    padding: 10px; /* Reduce padding */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .navbar-container h3 {
+    padding: 10px; /* Reduce padding */
+    font-size: 18px; /* Adjust font size */
+  }
+
+  .search-container {
+    margin: 8px 0; /* Adjust margin */
+    width: 100%; /* Take full width */
+    grid-template-columns: 1fr auto; /* Adjust grid layout */
+  }
+
+  .search-container input,
+  .search-container button {
+    padding: 8px; /* Reduce padding */
+    font-size: 14px; /* Adjust font size */
+  }
+
+  .menu-button {
+    top: 5px; /* Adjust position */
+    right: 10px; /* Adjust position */
+    font-size: 14px; /* Adjust font size */
+    padding: 8px 10px; /* Adjust padding */
+  }
+    footer.content {
+    padding: 20px; /* Reduce padding */
+    display: block; /* Stack elements vertically */
+  }
+
+  footer.content .data,
+  footer.content .link,
+  footer.content .service,
+  footer.content .detail {
+    margin-bottom: 20px; /* Add space between sections */
+  }
+
+  footer.content .data p,
+  footer.content .link a,
+  footer.content .service a,
+  footer.content .detail a {
+    font-size: 12px; /* Adjust font size */
+  }
+
+  footer.content .copyright {
+    font-size: 12px; /* Adjust font size */
+    margin-top: 10px; /* Reduce margin */
+  }
+
+  footer.content .data h3,
+  footer.content .link h3,
+  footer.content .service h3,
+  footer.content .detail h3 {
+    font-size: 18px; /* Adjust font size */
+    padding: 10px 0; /* Reduce padding */
+  }
 }

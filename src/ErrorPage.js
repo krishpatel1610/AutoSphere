@@ -6,11 +6,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const ErrorPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isCompatible, setIsCompatible] = useState(true); // Default to true
+  const [isSmallScreen, setIsSmallScreen] = useState(false); // State to track small screen
 
   useEffect(() => {
     const handleResize = () => {
-      setIsCompatible(window.innerWidth > 756); // Set compatibility based on window width
+      setIsSmallScreen(window.innerWidth <= 756); // Set isSmallScreen based on window width
     };
 
     handleResize(); // Initial check
@@ -25,29 +25,15 @@ const ErrorPage = () => {
   const handleBackToHome = () => {
     const path = location.pathname;
     if (path.startsWith('/Admin')) {
-      navigate('/Admin');
+      if (isSmallScreen) {
+        navigate('/');
+      } else {
+        navigate('/Admin');
+      }
     } else {
       navigate('/');
     }
   };
-
-  // Check for /Admin in pathname and device compatibility
-  if (location.pathname.startsWith('/Admin') && !isCompatible) {
-    return (
-      <div className="error-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
-        <Result
-          status="403"
-          title="Device Not Compatible"
-          subTitle="Sorry, your device is not compatible to access Admin functionality. Please use a larger screen."
-          extra={
-            <Button variant="contained" color="primary" onClick={handleBackToHome} style={{ textDecoration: 'none' }}>
-              Back to Home
-            </Button>
-          }
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="error-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
@@ -61,6 +47,18 @@ const ErrorPage = () => {
           </Button>
         }
       />
+      {isSmallScreen && location.pathname.startsWith('/Admin') && (
+        <Result
+          status="403"
+          title="Device Not Compatible"
+          subTitle="Sorry, your device is not compatible to access Admin functionality. Please use a larger screen."
+          extra={
+            <Button type="primary" href="/" style={{ textDecoration: 'none' }}>
+              Back to Home
+            </Button>
+          }
+        />
+      )}
     </div>
   );
 };

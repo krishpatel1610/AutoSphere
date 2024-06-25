@@ -230,28 +230,28 @@
   .adv-cars img.fade-in {
 	opacity: 1;
   }
-  @media only screen and (max-width: 1200px) {
-  .panel .tabcontent {
-    grid-template-columns: repeat(3, 1fr);
-    /* Display three cards per row on medium screens */
+@media only screen and (max-width: 1200px) {
+  .panel .tabs {
+    overflow-x: auto; /* Enable horizontal scrolling for tabs */
+    white-space: nowrap; /* Prevent tabs from wrapping */
+  }
+
+  .panel .tabs button.tablink {
+    padding: 8px 20px; /* Adjust padding for better touch/click area */
+    margin: 0px 10px;
+    font-size: 14px;
   }
 }
 
 @media only screen and (max-width: 992px) {
-  .panel .tabcontent {
-    grid-template-columns: repeat(2, 1fr);
-    /* Display two cards per row on small screens */
+  .panel .tabs button.tablink {
+    padding: 8px 15px; /* Adjust padding for smaller screens */
   }
 }
 
 @media only screen and (max-width: 576px) {
-  .panel .tabcontent {
-    grid-template-columns: 1fr;
-    /* Display one card per row on extra small screens */
-  }
-
-  .brandcontent {
-    grid-template-columns: repeat(3, 1fr);
-    /* Display three columns of brands per row on extra small screens */
+  .panel .tabs button.tablink {
+    padding: 8px 10px; /* Further adjust padding for extra small screens */
   }
 }
+ 

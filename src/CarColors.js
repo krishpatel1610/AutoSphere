@@ -28,7 +28,7 @@ const CarColors = () => {
   useEffect(() => {
     const fetchVehicleData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/vehicles/${id}`);
+        const response = await axios.get(`https://autospherebackend.onrender.com/api/vehicles/${id}`);
         if (response.data && response.data.colors) {
           setCarColors(response.data.colors);
           setActiveTab(response.data.colors[0]?._id); // Set initial active tab to the first color ID

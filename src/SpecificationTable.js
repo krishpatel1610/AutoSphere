@@ -15,7 +15,7 @@ const SpecificationTable = () => {
   useEffect(() => {
     const fetchVehicleData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/vehicles/${id}`);
+        const response = await axios.get(`https://autospherebackend.onrender.com/api/vehicles/${id}`);
         if (response.data) {
           setVehicleData(response.data);
           setLoading(false);
@@ -33,7 +33,7 @@ const SpecificationTable = () => {
 
   const fetchAlternativeCars = async (categoryId, currentVehicleId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/vehicles/byCategory/${categoryId}?limit=4`);
+      const response = await axios.get(`https://autospherebackend.onrender.com/api/vehicles/byCategory/${categoryId}?limit=4`);
       if (response.data) {
         const filteredCars = response.data.filter(car => car._id !== currentVehicleId);
         const carsWithBrandNames = await Promise.all(filteredCars.map(async (car) => {
@@ -52,7 +52,7 @@ const SpecificationTable = () => {
 
   const fetchBrandName = async (brandId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/brands/${brandId}`);
+      const response = await axios.get(`https://autospherebackend.onrender.com/api/brands/${brandId}`);
       if (response.data) {
         return response.data.name; // Return brand name
       }

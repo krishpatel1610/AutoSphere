@@ -36,7 +36,7 @@ const ResetPasswordOTP = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/verifyOTP', {
+      const response = await fetch('https://autospherebackend.onrender.com/api/verifyOTP', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ const ResetPasswordOTP = () => {
 
   const handleForgot = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/forgot-password', {
+      const response = await fetch('https://autospherebackend.onrender.com/api/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

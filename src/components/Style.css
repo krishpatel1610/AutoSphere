@@ -324,7 +324,7 @@ header.banner {
   }
 
   .adv .adv-content span {
-    font-size: 10px; /* Further adjust additional text size for smaller screens */
+    font-size: 5px; /* Further adjust additional text size for smaller screens */
   }
 
   .adv-info button.advBtn {

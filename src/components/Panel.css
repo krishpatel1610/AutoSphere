@@ -298,4 +298,8 @@
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjust brand card grid for extra small screens */
     gap: 5px;
   }
+.brandcontent .brand_cards img {
+    max-height: 40px; /* Adjust image size for smaller screens */
+  }
+
 }

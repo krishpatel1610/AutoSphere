@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const cityPriceController = require('../controllers/cityPriceController');
+const cityPriceController = require('../Controllers/cityPriceController');
 
 // Create a new city price
 router.post('/', cityPriceController.createCityPrice);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import { Result } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
+import './ErrorPage.css'; // Import your CSS file for styling
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -9,16 +10,17 @@ const ErrorPage = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false); // State to track small screen
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 756); // Set isSmallScreen based on window width
+    const mediaQuery = window.matchMedia('(max-width: 756px)');
+    const handleScreenChange = (e) => {
+      setIsSmallScreen(e.matches); // Set isSmallScreen based on media query match
     };
 
-    handleResize(); // Initial check
+    handleScreenChange(mediaQuery); // Initial check
 
-    window.addEventListener('resize', handleResize);
+    mediaQuery.addEventListener('change', handleScreenChange);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      mediaQuery.removeEventListener('change', handleScreenChange);
     };
   }, []);
 
@@ -36,13 +38,13 @@ const ErrorPage = () => {
   };
 
   return (
-    <div className="error-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
+    <div className="error-container">
       <Result
         status="404"
         title="404"
         subTitle="Sorry, the page you visited does not exist."
         extra={
-          <Button variant="contained" color="primary" onClick={handleBackToHome} style={{ textDecoration: 'none' }}>
+          <Button variant="contained" color="primary" onClick={handleBackToHome} className="back-to-home-button">
             Back to Home
           </Button>
         }
@@ -53,7 +55,7 @@ const ErrorPage = () => {
           title="Device Not Compatible"
           subTitle="Sorry, your device is not compatible to access Admin functionality. Please use a larger screen."
           extra={
-            <Button type="primary" href="/" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary" href="/" className="back-to-home-button">
               Back to Home
             </Button>
           }

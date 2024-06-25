@@ -13,7 +13,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); // synthetic event read once
         if(credantials.password === credantials.cpassword){
-        const response = await fetch("http://localhost:5000/api/createAdmin", {
+        const response = await fetch("https://autospherebackend.onrender.com/api/createAdmin", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

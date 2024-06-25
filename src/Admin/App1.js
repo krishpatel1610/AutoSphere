@@ -17,6 +17,9 @@ function App1() {
 
     window.addEventListener("resize", handleResize);
 
+    // Check initial window size
+    handleResize();
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };

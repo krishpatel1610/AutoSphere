@@ -38,11 +38,11 @@ const Panel = () => {
     // Fetch initial data (categories, brands, vehicles)
     const fetchData = async () => {
       try {
-        const categoriesResponse = await fetch('http://localhost:5000/api/categories');
+        const categoriesResponse = await fetch('https://autospherebackend.onrender.com/api/categories');
         const categoriesData = await categoriesResponse.json();
         setCategories(categoriesData);
 
-        const brandsResponse = await fetch('http://localhost:5000/api/brands');
+        const brandsResponse = await fetch('https://autospherebackend.onrender.com/api/brands');
         const brandsData = await brandsResponse.json();
         setBrands(brandsData);
 
@@ -65,7 +65,7 @@ const Panel = () => {
     // Fetch new vehicles
     const fetchVehicles = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/vehicles');
+        const response = await fetch('https://autospherebackend.onrender.com/api/vehicles');
         const vehiclesData = await response.json();
 
         // Get the last 4 cars and reverse them to get in descending order
@@ -126,7 +126,7 @@ const Panel = () => {
     const fetchData = async () => {
       try {
         // Fetch all vehicles (replace with your actual API endpoint)
-        const response = await fetch('http://localhost:5000/api/vehicles');
+        const response = await fetch('https://autospherebackend.onrender.com/api/vehicles');
         const vehiclesData = await response.json();
 
         // Get searchQuery from localStorage
@@ -191,7 +191,7 @@ const Panel = () => {
 
   const fetchVehiclesByCategory = async (categoryId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/vehicles/byCategory/${categoryId}`);
+      const response = await fetch(`https://autospherebackend.onrender.com/api/vehicles/byCategory/${categoryId}`);
       const vehiclesData = await response.json();
 
       // Sort vehicles by launch date in descending order

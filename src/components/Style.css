@@ -319,4 +319,15 @@ header.banner {
   .menu-container {
     grid-template-columns: 1fr; /* Example: 1 column on even smaller screens */
   }
+     .adv .adv-content h2 {
+    font-size: 16px; /* Further adjust heading size for smaller screens */
+  }
+
+  .adv .adv-content span {
+    font-size: 10px; /* Further adjust additional text size for smaller screens */
+  }
+
+  .adv-info button.advBtn {
+    padding: 6px 12px; /* Further adjust button padding for smaller screens */
+  }
 }

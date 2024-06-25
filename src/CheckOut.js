@@ -44,7 +44,7 @@ const CheckOut = () => {
   useEffect(() => {
     const fetchVehicle = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/vehicles/${vehicleId}`);
+        const response = await fetch(`https://autospherebackend.onrender.com/api/vehicles/${vehicleId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

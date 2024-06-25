@@ -298,3 +298,51 @@
 .adv-cars img.fade-out {
   opacity: 0;
 }
+
+/* Media Queries */
+
+@media only screen and (max-width: 1200px) {
+  .car-intro {
+    flex-direction: column; /* Stack items vertically on medium screens */
+  }
+
+  .car-banner .car-body {
+    width: 90%; /* Adjust width for better spacing on medium screens */
+    margin: 40px 3% 40px 3%;
+  }
+
+  .table-section {
+    padding: 80px 20px 20px 20px; /* Adjust padding for better spacing on medium screens */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .car-banner .car-body {
+    width: 100%; /* Full width on small screens */
+    margin: 40px 0px;
+  }
+
+  .table-section {
+    grid-template-columns: 100%; /* Single column layout on small screens */
+    padding: 60px 10px 10px 10px; /* Adjust padding for small screens */
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .car-intro .car-show {
+    margin-top: 10px; /* Reduce top margin for smaller screens */
+  }
+
+  .car-body {
+    margin: 30px 3%; /* Adjust margins for smaller screens */
+  }
+
+  .table-section {
+    padding: 40px 10px; /* Adjust padding for smaller screens */
+  }
+
+  .table-section table.alternative-cars {
+    width: 90%; /* Adjust width for better fit on smaller screens */
+    margin: 10px 5%;
+  }
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import { Result } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './ErrorPage.css'; // Import your CSS file for styling
+
 
 const ErrorPage = () => {
   const navigate = useNavigate();

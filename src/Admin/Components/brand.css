@@ -1,0 +1,28 @@
+/* General styles for responsiveness */
+.ResponsiveContainer {
+  margin: auto;
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Styles for the table container */
+.TableContainer {
+  min-width: 576px; /* Ensure the table doesn't shrink below this width */
+}
+
+/* Media query for devices up to 576px */
+@media only screen and (max-width: 576px) {
+  .TableContainer {
+    width: 100%; /* Full width on small devices */
+  }
+  
+  .TableContainer table {
+    width: 100%; /* Ensure table takes full width */
+  }
+
+  .TableContainer th,
+  .TableContainer td {
+    white-space: nowrap; /* Prevent text wrapping */
+    padding: 8px; /* Adjust padding */
+  }
+}

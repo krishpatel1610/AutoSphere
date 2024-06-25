@@ -292,3 +292,31 @@ header.banner {
   transition: .5s;
 }
 
+
+@media only screen and (max-width: 1200px) {
+  .menu-container {
+    font-size: 12px; /* Example: reduce font size for smaller screens */
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .title p {
+    font-size: 20px; /* Example: adjust font size for smaller header */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .title p {
+    font-size: 18px; /* Example: further reduce font size for mobile devices */
+  }
+  
+  .menu-container {
+    grid-template-columns: repeat(2, 1fr); /* Example: 2 columns on smaller screens */
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .menu-container {
+    grid-template-columns: 1fr; /* Example: 1 column on even smaller screens */
+  }
+}

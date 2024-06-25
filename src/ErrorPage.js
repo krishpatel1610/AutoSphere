@@ -3,7 +3,6 @@ import { Button } from '@mui/material';
 import { Result } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-
 const ErrorPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -11,6 +10,7 @@ const ErrorPage = () => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 756px)');
+    
     const handleScreenChange = (e) => {
       setIsSmallScreen(e.matches); // Set isSmallScreen based on media query match
     };
@@ -36,6 +36,13 @@ const ErrorPage = () => {
       navigate('/');
     }
   };
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/Admin')) {
+      const mediaQuery = window.matchMedia('(max-width: 756px)');
+      setIsSmallScreen(mediaQuery.matches);
+    }
+  }, [location.pathname]);
 
   return (
     <div className="error-container">

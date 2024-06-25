@@ -7,7 +7,7 @@ import { Snackbar, Alert } from "@mui/material";
 import AppFooter from "../../Components/AppFooter";
 import AppHeader from "../../Components/AppHeader";
 import SideMenu from "../../Components/SideMenu";
-import './Brand.css'; // Import custom CSS
+import '../../Components/brand.css'; // Import custom CSS
 
 function Brand() {
   const dispatch = useDispatch();

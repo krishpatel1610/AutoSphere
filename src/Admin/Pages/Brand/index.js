@@ -7,6 +7,7 @@ import { Snackbar, Alert } from "@mui/material";
 import AppFooter from "../../Components/AppFooter";
 import AppHeader from "../../Components/AppHeader";
 import SideMenu from "../../Components/SideMenu";
+import './Brand.css'; // Import custom CSS
 
 function Brand() {
   const dispatch = useDispatch();
@@ -82,7 +83,7 @@ function Brand() {
       <AppHeader />
       <div className="SideMenuAndPageContent">
         <SideMenu />
-        <div style={{ margin: "auto" }}>
+        <div className="ResponsiveContainer">
           <Space size={20} direction="vertical">
             <Space
               size={20}
@@ -92,32 +93,6 @@ function Brand() {
               <Typography.Title level={4} style={{ margin: 0 }}>
                 Brand
               </Typography.Title>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
-              <span dangerouslySetInnerHTML={{ __html: " " }}></span>
               <Button
                 type="primary"
                 onClick={handleAddBrandClick}
@@ -126,15 +101,16 @@ function Brand() {
                 Add Brand
               </Button>
             </Space>
-            <Table
-              loading={loading}
-              columns={columns}
-              dataSource={brands}
-              pagination={{
-                pageSize: 5,
-              }}
-              style={{ width: "805px" }}
-            />
+            <div className="TableContainer">
+              <Table
+                loading={loading}
+                columns={columns}
+                dataSource={brands}
+                pagination={{
+                  pageSize: 5,
+                }}
+              />
+            </div>
           </Space>
         </div>
       </div>

@@ -38,21 +38,21 @@ function Dashboard() {
   
   useEffect(() => {
     // Fetch brands from backend API
-    fetch("http://localhost:5000/api/brands")
+    fetch("https://autospherebackend.onrender.com/api/brands")
       .then((response) => response.json())
       .then((data) => setBrands(data))
       .catch((error) => console.error("Error fetching brands:", error));
   }, []);
   useEffect(() => {
     // Fetch brands from backend API
-    fetch("http://localhost:5000/api/vehicles")
+    fetch("https://autospherebackend.onrender.com/api/vehicles")
       .then((response) => response.json())
       .then((data) => setVehicles(data))
       .catch((error) => console.error("Error fetching brands:", error));
   }, []);
   useEffect(() => {
     // Fetch brands from backend API
-    fetch("http://localhost:5000/api/categories")
+    fetch("https://autospherebackend.onrender.com/api/categories")
       .then((response) => response.json())
       .then((data) => setCategories(data))
       .catch((error) => console.error("Error fetching brands:", error));
@@ -279,7 +279,7 @@ function RecentOrders() {
         // Fetch car count for each brand
         const brandsWithCarCount = await Promise.all(
           data.map(async (brand) => {
-            const carCountResponse = await fetch(`http://localhost:5000/api/vehicles/brands/${brand._id}/cars`, {
+            const carCountResponse = await fetch(`https://autospherebackend.onrender.com/api/vehicles/brands/${brand._id}/cars`, {
               method: "GET",
               headers: {
                 'Content-Type': 'application/json'
@@ -351,7 +351,7 @@ function DashboardChart() {
 
   const fetchBrandData = async () => {
     try {
-      const brandsResponse = await fetch("http://localhost:5000/api/brands");
+      const brandsResponse = await fetch("https://autospherebackend.onrender.com/api/brands");
       if (!brandsResponse.ok) {
         throw new Error(`HTTP error! Status: ${brandsResponse.status}`);
       }

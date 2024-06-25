@@ -83,7 +83,7 @@ function Brand() {
       <AppHeader />
       <div className="SideMenuAndPageContent">
         <SideMenu />
-        <div className="ResponsiveContainer" style={{ margin: auto}}>
+        <div className="ResponsiveContainer" style={{ margin: "auto"}}>
           <Space size={20} direction="vertical">
             <Space
               size={20}

@@ -108,7 +108,7 @@
   .car-box {
 	margin-top: 30px;
 	display: grid;
-	grid-template-columns: auto auto;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	border: 1px solid #e3e3fc;
 	height: 100%;
 	border-radius: 10px;

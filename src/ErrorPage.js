@@ -49,7 +49,7 @@ const ErrorPage = () => {
           </Button>
         }
       />
-      {isSmallScreen && location.pathname.startsWith('/Admin') && (
+      {isSmallScreen && location.pathname.startsWith('/') && (
         <Result
           status="403"
           title="Device Not Compatible"

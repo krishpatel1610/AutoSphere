@@ -22,7 +22,7 @@ export const fetchCategoriesFailure = (error) => ({
 
 // Function to fetch categories
 const getCategories = () => {
-  return fetch('http://localhost:5000/api/categories')
+  return fetch('https://autospherebackend.onrender.com/api/categories')
     .then((res) => {
       if (!res.ok) {
         throw new Error('Failed to fetch categories');

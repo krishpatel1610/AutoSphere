@@ -3,6 +3,7 @@ import {
   CarOutlined,
   CarFilled,
 } from "@ant-design/icons";
+import '../../Components/brand.css'; // Import custom CSS
 import { Badge,Card, Space, Statistic, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
 import {

@@ -9,6 +9,10 @@ const brandRoutes = require('./Routes/brandRoutes');
 const categoryRoutes = require('./Routes/categoryRoutes');
 const vehicleRoutes = require('./Routes/vehicleRoutes');
 const cityPriceRoutes = require('./Routes/cityPriceRoutes');
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://frontend--autospherehub.netlify.app'
+];
 
 mongoDB();
 // fcccccc

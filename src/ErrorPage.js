@@ -6,17 +6,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const ErrorPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isCompatible, setIsCompatible] = useState(window.innerWidth > 756);
+  const [isCompatible, setIsCompatible] = useState(true); // Default to true
 
   useEffect(() => {
     const handleResize = () => {
-      setIsCompatible(window.innerWidth > 756);
+      setIsCompatible(window.innerWidth > 756); // Set compatibility based on window width
     };
 
-    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
 
-    // Check initial window size
-    handleResize();
+    window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -32,7 +31,8 @@ const ErrorPage = () => {
     }
   };
 
-  if (!isCompatible && location.pathname.startsWith('/Admin')) {
+  // Check for /Admin in pathname and device compatibility
+  if (location.pathname.startsWith('/Admin') && !isCompatible) {
     return (
       <div className="error-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' }}>
         <Result

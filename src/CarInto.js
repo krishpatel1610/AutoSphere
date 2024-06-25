@@ -37,7 +37,7 @@ const CarIntro = () => {
   useEffect(() => {
     const fetchVehicle = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/vehicles/${vehicleId}`);
+        const response = await axios.get(`https://autospherebackend.onrender.com/api/vehicles/${vehicleId}`);
         setVehicle(response.data);
         fetchBrandName(response.data.brand_id);
       } catch (error) {
@@ -49,7 +49,7 @@ const CarIntro = () => {
 
   const fetchBrandName = async (brandId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/brands/${brandId}`);
+      const response = await axios.get(`https://autospherebackend.onrender.com/api/brands/${brandId}`);
       setBrandName(response.data.name);
     } catch (error) {
       console.error('Error fetching brand name:', error);

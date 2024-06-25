@@ -417,4 +417,23 @@ header.banner {
     font-size: 18px; /* Adjust font size */
     padding: 10px 0; /* Reduce padding */
   }
+     header.banner {
+    height: 70vh; /* Adjust height for smaller screens */
+  }
+
+  .banner .title {
+    height: 70vh; /* Ensure the title section matches the banner height */
+    padding: 20px; /* Add padding for better spacing */
+  }
+
+  .title p {
+    font-size: 16px; /* Reduce font size */
+    padding: 5px; /* Adjust padding */
+    margin: 30% 5% 5px 5%; /* Adjust margins for better centering */
+  }
+
+  .title h3 {
+    font-size: 18px; /* Adjust font size */
+    margin-top: 10px; /* Add some margin above the title */
+  }
 }
